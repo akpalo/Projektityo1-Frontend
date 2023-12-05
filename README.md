@@ -1,2 +1,2 @@
-# Projektity-_1
+# Projektityö_1
 Tämä repositorio sisältää Projektityön materiaalia
