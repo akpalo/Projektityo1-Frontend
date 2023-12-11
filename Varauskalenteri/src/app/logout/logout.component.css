@@ -1,0 +1,19 @@
+.logout-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    height: 100vh;
+    background-color: #f4f4f48a;
+  }
+  
+  .logout-card {
+    width: 300px;
+    text-align: center;
+    background-color: #ffffff;
+  }
+  
+  .logout-message {
+    font-size: 1.5em;
+    margin: 20px;
+  }
