@@ -1,0 +1,43 @@
+<div class="alusta">
+
+    <form class="example-form">
+
+        <mat-form-field class="numero">
+          <mat-label>Varaajan puhelinnumero</mat-label>
+          <input matInput placeholder="Puh.">
+        </mat-form-field>
+
+        <br>
+
+        <h4 class="otsikko">Valitse laite</h4>
+        
+        <mat-form-field>
+            <mat-label>Laitteet</mat-label>
+            <mat-select>
+                <!--
+                @for (laite of laitteet; track laite) {
+                    <mat-option [value]="laite.value">{{laite.viewValue}}</mat-option>
+                }
+                -->
+            </mat-select>
+        </mat-form-field>
+
+        <h4 class="otsikko">Valitse varauspäivä</h4>
+
+        <button mat-raised-button color="primary">Avaa kalenteri</button>
+
+        <br><br>
+
+        <h4 class="otsikko">Valittu päivä:</h4>
+
+        <mat-card class="kortti">
+            <mat-card-content>valittu päivä tähän :D</mat-card-content>
+        </mat-card>
+
+        <br><br>
+        
+        <button mat-raised-button color="primary">Varaa</button>
+
+    </form>
+    
+</div>
