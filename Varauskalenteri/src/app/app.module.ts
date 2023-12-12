@@ -6,11 +6,14 @@ import { MatCardModule } from '@angular/material/card';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatGridListModule } from '@angular/material/grid-list';
+import { FormsModule } from '@angular/forms';
+import { MatSelectModule } from '@angular/material/select';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
 import { LogoutComponent } from './logout/logout.component';
+import { VaraaLaiteComponent } from './varaa-laite/varaa-laite.component';
 
 
 
@@ -18,17 +21,20 @@ import { LogoutComponent } from './logout/logout.component';
   declarations: [
     AppComponent,
     LoginComponent,
-    LogoutComponent
+    LogoutComponent,
+    VaraaLaiteComponent
   ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
+    AppRoutingModule,
+    FormsModule,
+    MatSelectModule,
     MatButtonModule,
     MatCardModule,
     MatInputModule,
     MatFormFieldModule,
-    MatGridListModule,
-    AppRoutingModule,
+    MatGridListModule
   ],
   providers: [],
   bootstrap: [AppComponent]

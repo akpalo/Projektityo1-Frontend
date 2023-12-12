@@ -1,0 +1,11 @@
+
+.alusta {
+    width: 250px;
+    height: 500px;
+    position: relative;
+    left: 40%;
+    top: 20%;
+    background-color: #d4d2d2;
+    padding: 30px;
+}
+
