@@ -39,11 +39,6 @@ import { LoadingComponent } from './loading/loading.component';
     AppRoutingModule,
     FormsModule,
     MatSelectModule,
-    CommonModule,
-    CalendarModule.forRoot({
-      provide: DateAdapter,
-      useFactory: adapterFactory,
-    }),
     MatButtonModule,
     MatCardModule,
     MatInputModule,

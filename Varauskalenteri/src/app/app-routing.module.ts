@@ -10,7 +10,7 @@ const routes: Routes = [
   { path: "login", component: LoginComponent },
   { path: "logout", component: LogoutComponent },
   { path: "varaa", component: VaraaLaiteComponent },
-  { path: '', redirectTo: '/kalenteri', pathMatch: 'full' },
+  { path: '', redirectTo: '/login', pathMatch: 'full' },
 ];
 
 @NgModule({
