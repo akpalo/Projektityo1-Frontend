@@ -1,0 +1,33 @@
+<div class="calendar">
+    <div class="header">
+        <button mat-raised-button color="primary" (click)="previousWeek()">viikko {{ getWeekNumber(selectedDate)-1 }}</button>
+        <h2>{{ selectedDate | date: 'MMMM d, y' }}</h2>
+        <button mat-raised-button color="primary" (click)="nextWeek()">viikko {{ getWeekNumber(selectedDate)+1 }}</button> 
+    </div>
+    <div class="days">
+        <div *ngFor="let day of daysOfWeek" class="day">{{ day }}</div>
+    </div>
+    <div class="dates">
+        <div *ngFor="let day of getWeekDays()" class="date">
+            {{ day | date: 'd' }}
+            
+            <div *ngIf="bookings[day.toISOString()]">Varattu</div>
+        </div>
+    </div>
+</div>
+
+<div class="buttons">
+    <button class="varaa" mat-raised-button color="primary">Tee varaus</button>
+    <button class="lisaa" mat-raised-button color="primary">Lisää varattava</button>
+    <button class="kirjaudu" mat-raised-button color="primary" >Kirjaudu ulos</button>
+</div>
+
+<div class="table-container">
+    <div class="time-column">
+        <div class="hour" *ngFor="let hour of hours">
+            <div class="hour-box">{{ hour }} - {{ hour + 1 }}</div>
+            
+        </div>
+    </div>
+    
+</div>
