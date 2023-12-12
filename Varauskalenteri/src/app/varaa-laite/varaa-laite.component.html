@@ -1,44 +1,64 @@
-<!-- div jonka sisälle komponentti kasataan-->
-<div class="alusta">
+<!-- sivun container -->
+<mat-drawer-container class="body-container">
 
-    <form class="example-form">
-        <!-- puhelinnumero input kenttä -->
-        <mat-form-field class="numero">
-          <mat-label>Varaajan puhelinnumero</mat-label>
-          <input matInput placeholder="Puh.">
-        </mat-form-field>
-
+    <!-- sivu valikko -->
+    <mat-drawer closed #sidenav class="sidenav">
+        <p>Sivut:</p>
+        <a href="/login">Login</a>
         <br>
-
-        <!-- varattavan laitteen valinta dropmenu -->
-        <h4 class="otsikko">Valitse laite</h4>
-        <mat-form-field>
-            <mat-label>Laitteet</mat-label>
-            <mat-select>
-              <!-- for hommeli ei toimi vielä. valittaa että yksittäinen "{" olisi karkuteillä tiedostossa, vaikka yhtään ylimääräisiä ei löydy -->
-                <!--
-                @for (laite of laitteet; track laite) {
-                    <mat-option [value]="laite.value">{{laite.viewValue}}</mat-option>
-                }
-                -->
-              
-            </mat-select>
-        </mat-form-field>
-        <!-- Nappi, joka avaa varauskalenterin -->
-        <h4 class="otsikko">Valitse varauspäivä</h4>
-        <button mat-raised-button color="primary">Avaa kalenteri</button>
-
-        <br><br>
-        <!-- valittu päivä tulee tähän korttiin näkyville. voi tulla myös lisätietoja -->
-        <h4 class="otsikko">Valittu päivä:</h4>
-        <mat-card class="kortti">
-            <mat-card-content>valittu päivä tähän :D</mat-card-content>
-        </mat-card>
-
-        <br><br>
-        <!-- tämä nappi tallentaa varauksen tiedot tietokantaan -->
-        <button mat-raised-button color="primary">Varaa</button>
-
-    </form>
+        <a href="/logout">Logout</a>
+        <br>
+        <a href="/varaa">Varaus sivu</a>
+    </mat-drawer>
     
-</div>
+    <!-- valikon avaus nappi -->
+    <button (click)="sidenav.toggle()" class="sidebar-button" mat-mini-fab color="primary">
+        <mat-icon>menu</mat-icon>
+    </button>
+
+    <!-- div jonka sisälle komponentti kasataan-->
+    <div class="alusta">
+
+        <form class="example-form">
+            <!-- puhelinnumero input kenttä -->
+            <mat-form-field class="numero">
+            <mat-label>Varaajan puhelinnumero</mat-label>
+            <input matInput placeholder="Puh.">
+            </mat-form-field>
+
+            <br>
+
+            <!-- varattavan laitteen valinta dropmenu -->
+            <h4 class="otsikko">Valitse laite</h4>
+            <mat-form-field>
+                <mat-label>Laitteet</mat-label>
+                <mat-select>
+                <!-- for hommeli ei toimi vielä. valittaa että yksittäinen "{" olisi karkuteillä tiedostossa, vaikka yhtään ylimääräisiä ei löydy -->
+                    <!--
+                    @for (laite of laitteet; track laite) {
+                        <mat-option [value]="laite.value">{{laite.viewValue}}</mat-option>
+                    }
+                    -->
+                
+                </mat-select>
+            </mat-form-field>
+            <!-- Nappi, joka avaa varauskalenterin -->
+            <h4 class="otsikko">Valitse varauspäivä</h4>
+            <button mat-raised-button color="primary">Avaa kalenteri</button>
+
+            <br><br>
+            <!-- valittu päivä tulee tähän korttiin näkyville. voi tulla myös lisätietoja -->
+            <h4 class="otsikko">Valittu päivä:</h4>
+            <mat-card class="kortti">
+                <mat-card-content>valittu päivä tähän :D</mat-card-content>
+            </mat-card>
+
+            <br><br>
+            <!-- tämä nappi tallentaa varauksen tiedot tietokantaan -->
+            <button mat-raised-button color="primary">Varaa</button>
+
+        </form>
+        
+    </div>
+
+</mat-drawer-container>
