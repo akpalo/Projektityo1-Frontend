@@ -8,9 +8,9 @@ import { Router } from '@angular/router';
 })
 export class LoginComponent {
 
-  login () {}
+  login() { }
 
-  constructor(private router: Router) {}
+  constructor(private router: Router) { }
 
   logout() {
     this.router.navigate(['/logout']);

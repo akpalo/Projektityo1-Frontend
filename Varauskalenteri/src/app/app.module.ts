@@ -11,6 +11,9 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
 import { LogoutComponent } from './logout/logout.component';
+import { LoadingComponent } from './loading/loading.component';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+
 
 
 
@@ -18,7 +21,8 @@ import { LogoutComponent } from './logout/logout.component';
   declarations: [
     AppComponent,
     LoginComponent,
-    LogoutComponent
+    LogoutComponent,
+    LoadingComponent
   ],
   imports: [
     BrowserModule,
@@ -29,6 +33,7 @@ import { LogoutComponent } from './logout/logout.component';
     MatFormFieldModule,
     MatGridListModule,
     AppRoutingModule,
+    MatProgressSpinnerModule
   ],
   providers: [],
   bootstrap: [AppComponent]
