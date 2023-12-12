@@ -1,4 +1,22 @@
-<div class="login-container">
+<!-- sivun container -->
+<mat-drawer-container class="body-container">
+
+  <!-- sivu valikko -->
+  <mat-drawer closed #sidenav class="sidenav">
+      <p>Sivut:</p>
+      <a href="/login">Login</a>
+      <br>
+      <a href="/logout">Logout</a>
+      <br>
+      <a href="/varaa">Varaus sivu</a>
+  </mat-drawer>
+  
+  <!-- valikon avaus nappi -->
+  <button (click)="sidenav.toggle()" class="sidebar-button" mat-mini-fab color="primary">
+      <mat-icon>menu</mat-icon>
+  </button>
+  
+  <div class="login-container">
     <mat-card class="login-card">
       <div class="company-name">Yrityksen nimi</div>
       <mat-card-title class="login-title">Kirjaudu sisään</mat-card-title>
@@ -18,3 +36,6 @@
     </mat-card>
     <button mat-raised-button color="primary" (click)="logout()">Kirjaudu ulos</button>
   </div>
+
+</mat-drawer-container>
+

@@ -1,1 +1,5 @@
-<router-outlet></router-outlet>
+<app-loading *ngIf="loading"></app-loading>
+<div *ngIf="!loading">
+    <!-- Tässä on varsinaisen sisällön esimerkki -->
+    <router-outlet></router-outlet>
+</div>
