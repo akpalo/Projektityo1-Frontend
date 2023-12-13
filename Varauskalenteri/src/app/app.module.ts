@@ -1,4 +1,3 @@
-import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -31,7 +30,7 @@ import { LoadingComponent } from './loading/loading.component';
     VaraaLaiteComponent,
     LoadingComponent,
     KalenteriComponent,
-    
+
   ],
   imports: [
     BrowserModule,

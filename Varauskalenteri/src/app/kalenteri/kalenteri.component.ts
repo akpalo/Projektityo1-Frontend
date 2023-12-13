@@ -1,4 +1,5 @@
-import { Component, OnInit, ChangeDetectionStrategy, OnDestroy,} from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, OnDestroy, } from '@angular/core';
+import { Router } from '@angular/router';
 
 
 
@@ -11,29 +12,29 @@ import { Component, OnInit, ChangeDetectionStrategy, OnDestroy,} from '@angular/
 })
 export class KalenteriComponent implements OnInit, OnDestroy {
   daysOfWeek: string[] = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
-  selectedDate: Date = new Date(); 
-  bookings: any = {}; 
+  selectedDate: Date = new Date();
+  bookings: any = {};
   hours: number[] = Array.from({ length: 24 }, (_, i) => i);
-  router: any;
 
-  constructor() { }
+
+  constructor(private router: Router) { }
 
   ngOnInit(): void {
-    
+
   }
   ngOnDestroy(): void {
-    
+
   }
   getWeekDays(): Date[] {
     const weekDays: Date[] = [];
     const currentDay = this.selectedDate;
-    const dayOfWeek = currentDay.getDay(); 
+    const dayOfWeek = currentDay.getDay();
 
-    
+
     const startOfWeek = new Date(currentDay);
     startOfWeek.setDate(currentDay.getDate() - dayOfWeek + (dayOfWeek === 0 ? -6 : 1));
 
-    
+
     for (let i = 0; i < 7; i++) {
       const day = new Date(startOfWeek);
       day.setDate(startOfWeek.getDate() + i);
@@ -55,5 +56,9 @@ export class KalenteriComponent implements OnInit, OnDestroy {
 
   nextWeek(): void {
     this.selectedDate.setDate(this.selectedDate.getDate() + 7);
+  }
+
+  logout() {
+    this.router.navigate(['/logout']);
   }
 }
