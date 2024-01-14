@@ -1,5 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild} from '@angular/core';
+import { NgForm } from '@angular/forms';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
+
 
 @Component({
   selector: 'app-login',
@@ -8,9 +11,46 @@ import { Router } from '@angular/router';
 })
 export class LoginComponent {
 
-  login() { }
+  // Käyttäjän oikea puhelinnumero
+  private correctPhoneNumber = '12345'; //MUISTIO ITSELLE: TEE TÄHÄN AUTH SERVICE UUSIA NUMEROITA VARTEN
+  @ViewChild('loginForm') loginForm: NgForm | undefined;
+  
 
-  constructor(private router: Router) { }
+  // Injektoi Router
+  constructor(private router: Router, private snackBar: MatSnackBar) {}
+
+  login() {
+    // Tarkista, onko syötetty puhelinnumero oikea
+    if (this.loginForm && this.loginForm.value.phoneNumber === this.correctPhoneNumber) {
+      // Kirjautuminen onnistui, voit suorittaa haluamasi toimenpiteet täällä
+      console.log('Kirjautuminen onnistui');
+      this.showSuccessMessage('Kirjautuminen onnistui'); // Näytä onnistunut kirjautumisilmoitus
+      // Ohjaa käyttäjä haluamallesi sivulle
+      this.router.navigate(['/kalenteri']);
+    } else {
+      // Kirjautuminen epäonnistui, voit esimerkiksi näyttää virheilmoituksen
+      console.log('Kirjautuminen epäonnistui');
+      this.showFailureMessage('Kirjautuminen epäonnistui'); // Näytä epäonnistunut kirjautumisilmoitus
+
+    }
+  }
+
+  private showSuccessMessage(message: string): void {
+    this.snackBar.open(message, 'OK', {
+      duration: 3000,
+      verticalPosition: 'top',
+      horizontalPosition: 'center',
+    });
+  }
+
+  private showFailureMessage(message: string): void {
+    this.snackBar.open(message, 'OK', {
+      duration: 3000,
+      verticalPosition: 'top',
+      horizontalPosition: 'center',
+      panelClass: ['failure-snackbar'], // Lisää mukautettu CSS-luokka
+    });
+  }
 
   logout() {
     this.router.navigate(['/logout']);

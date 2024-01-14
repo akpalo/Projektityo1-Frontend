@@ -37,3 +37,13 @@ margin: 10px;
   font-size: 1.2em;
   margin-bottom: 20px;
 }
+
+.success-snackbar {
+  background-color: #4caf50; /* Vihreä väri */
+  color: #ffffff; /* Valkoinen teksti */
+}
+
+.failure-snackbar {
+  background-color: #ff6961; /* Punainen väri */
+  color: #ffffff; /* Valkoinen teksti */
+}

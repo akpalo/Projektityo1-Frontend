@@ -21,20 +21,14 @@
   <div class="login-container">
     <mat-card class="login-card">
       <div class="company-name">Yrityksen nimi</div>
-      <mat-card-title class="login-title">Kirjaudu sisään</mat-card-title>
-      
-      <mat-grid-list cols="1" rowHeight="100px">
-        <mat-grid-tile rowspan="1">
-          <mat-form-field>
-            <mat-label>Puhelinnumero</mat-label>
-            <input matInput type="text" placeholder="Syötä puhelinnumero">
-          </mat-form-field>
-        </mat-grid-tile>
+      <form (ngSubmit)="login()" #loginForm="ngForm">
+        <mat-form-field>
+          <mat-label>Puhelinnumero</mat-label>
+          <input matInput type="text" placeholder="Syötä puhelinnumero" name="phoneNumber" ngModel required>
+        </mat-form-field>
   
-        <mat-grid-tile rowspan="1">
-          <button mat-raised-button color="primary" (click)="login()">Kirjaudu sisään</button>
-        </mat-grid-tile>
-      </mat-grid-list>
+        <button mat-raised-button color="primary" type="submit" [disabled]="!loginForm.form.valid">Kirjaudu sisään</button>
+      </form>
     </mat-card>
     <button mat-raised-button color="primary" (click)="logout()">Kirjaudu ulos</button>
   </div>
