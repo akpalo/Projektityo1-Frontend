@@ -1,83 +1,109 @@
 .calendar {
-    width: 80%;
-    margin: 20px auto;
-    border: 1px solid #ccc;
-    padding: 10px;
-    max-width: 500px;
-  }
-  
-  .header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-  
-  .days {
-    display: flex;
-    justify-content: space-around;
-    background-color: #eee;
-    padding: 5px;
-  }
-  
-  .day {
-    width: 50px;
-    text-align: center;
-  }
-  
-  .dates {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-around;
-  }
-  
-  .date {
-    width: 50px;
-    height: 50px;
-    text-align: center;
-    line-height: 50px;
-    border: 1px solid #ccc;
-    margin: 5px;
-    position: relative;
-  }
-  
-  .date:hover {
-    background-color: #f0f0f0;
-    cursor: pointer;
-  }
-  
-  .date div {
-    position: absolute;
-    bottom: 5px;
-    left: 5px;
-    background-color: #ff0000;
-    color: #fff;
-    padding: 2px 5px;
-    border-radius: 3px;
-    font-size: 12px;
-  }
-  .hour-box {
-    border: 1px solid #ccc;
-    padding: 5px;
-    margin-bottom: 5px;
-    position: relative;
-    max-width: 50px; 
-    left: 300px;
-    bottom: 200px;
-  }
-  .buttons {
-    position: relative;
-    width: 200px; 
-    height: 200px; 
-    left: 900px;
-    bottom: 180px;
-  }
-  .varaa {
-    margin-bottom: 5px;
-  }
-  .lisaa {
-    margin-bottom: 5px;
-  }
+  margin: 20px auto;
+  border: 1px solid #ccc;
+  padding: 10px;
+  max-width: 1000px;
+}
 
-  
-  
-  
+.head {
+  width: 50%;
+  min-width: 500px;
+  border: 1px solid #ccc;
+  position: relative;
+  float: left;
+  left: 10%;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.days {
+  display: flex;
+  justify-content: space-around;
+  background-color: #eee;
+  padding: 5px;
+}
+
+.day {
+  width: 50px;
+  text-align: center;
+}
+
+.dates {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+
+.date {
+  width: 50px;
+  height: 50px;
+  text-align: center;
+  line-height: 50px;
+  border: 1px solid #ccc;
+  margin: 5px;
+  position: relative;
+}
+
+.date:hover {
+  background-color: #f0f0f0;
+  cursor: pointer;
+}
+
+.date div {
+  position: relative;
+  bottom: 5px;
+  left: 5px;
+  background-color: #ff0000;
+  color: #fff;
+  padding: 2px 5px;
+  border-radius: 3px;
+  font-size: 12px;
+}
+.hour-box {
+  border: 1px solid #ccc;
+  padding: 5px;
+  margin-bottom: 5px;
+  position: relative;
+  max-width: 50px;
+  top: 10px;
+}
+.buttons {
+  position: relative;
+  width: 200px; 
+  height: 200px; 
+  left: 900px;
+  bottom: 180px;
+}
+.varaa {
+  margin-bottom: 5px;
+}
+.lisaa {
+  margin-bottom: 5px;
+}
+
+.body-container {
+  width: 100%;
+  height: 100%;
+}
+
+.sidenav {
+  width: 100px;
+}
+
+.sidebar-button {
+  margin-left: 10px;
+  margin: 10px;
+}
+
+.alusta {
+  width: 200px;
+  background-color: #d4d2d2;
+  padding: 30px;
+  position: relative;
+  float: right;
+}
+

@@ -1,21 +1,28 @@
 import { Component, OnInit, ChangeDetectionStrategy, OnDestroy, } from '@angular/core';
 import { Router } from '@angular/router';
 
-
-
-
+interface Item {
+  value: string;
+  viewValue: string;
+}
 @Component({
   selector: 'app-kalenteri',
   changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './kalenteri.component.html',
   styleUrls: ['./kalenteri.component.css']
 })
+
 export class KalenteriComponent implements OnInit, OnDestroy {
   daysOfWeek: string[] = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
   selectedDate: Date = new Date();
   bookings: any = {};
   hours: number[] = Array.from({ length: 24 }, (_, i) => i);
 
+  resItems: Item[] = [
+    {value: 'laite-0', viewValue: 'Kamera'},
+    {value: 'laite-1', viewValue: 'Valo'},
+    {value: 'laite-2', viewValue: 'Green screen'},
+  ];
 
   constructor(private router: Router) { }
 
@@ -57,6 +64,7 @@ export class KalenteriComponent implements OnInit, OnDestroy {
   nextWeek(): void {
     this.selectedDate.setDate(this.selectedDate.getDate() + 7);
   }
+
 
   logout() {
     this.router.navigate(['/logout']);
