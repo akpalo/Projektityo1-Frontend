@@ -26,7 +26,7 @@ export class LoginComponent {
       console.log('Kirjautuminen onnistui');
       this.showSuccessMessage('Kirjautuminen onnistui'); // Näytä onnistunut kirjautumisilmoitus
       // Ohjaa käyttäjä haluamallesi sivulle
-      this.router.navigate(['/kalenteri']);
+      this.router.navigate(['/angcalendar']);
     } else {
       // Kirjautuminen epäonnistui, voit esimerkiksi näyttää virheilmoituksen
       console.log('Kirjautuminen epäonnistui');
@@ -52,7 +52,4 @@ export class LoginComponent {
     });
   }
 
-  logout() {
-    this.router.navigate(['/logout']);
-  }
 }
