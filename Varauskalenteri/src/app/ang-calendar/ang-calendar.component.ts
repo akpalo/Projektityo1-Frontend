@@ -1,4 +1,5 @@
-import { Component, ChangeDetectionStrategy, ViewChild, TemplateRef,} from '@angular/core';
+import { Component, ChangeDetectionStrategy, ViewChild, TemplateRef} from '@angular/core';
+import { Router } from '@angular/router';
 import {
   startOfDay,
   endOfDay,
@@ -129,7 +130,7 @@ export class AngCalendarComponent {
 
   activeDayIsOpen: boolean = true;
 
-  constructor(private modal: NgbModal) {}
+  constructor(private modal: NgbModal, private router: Router) {}
 
   dayClicked({ date, events }: { date: Date; events: CalendarEvent[] }): void {
     if (isSameMonth(date, this.viewDate)) {
@@ -196,5 +197,9 @@ export class AngCalendarComponent {
   closeOpenMonthViewDay() {
     this.activeDayIsOpen = false;
 
+  }
+
+  logout() {
+    this.router.navigate(['/logout']);
   }
 }

@@ -9,7 +9,7 @@ const routes: Routes = [
   { path: "kalenteri", component: KalenteriComponent},
   { path: "login", component: LoginComponent },
   { path: "logout", component: LogoutComponent },
-  { path: "angCalendar", component: AngCalendarComponent },
+  { path: "angcalendar", component: AngCalendarComponent },
   { path: '', redirectTo: '/kalenteri', pathMatch: 'full' },
 ];
 

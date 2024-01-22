@@ -1,4 +1,5 @@
-<div class="row text-center">
+<div class="kalenteri">
+  <div class="row text-center">
     <div class="col-md-4">
       <div class="btn-group">
         <div
@@ -209,3 +210,45 @@
     </div>
   </ng-template>
   
+</div>
+
+<div class="alusta">
+  <form class="example-form">
+      <!-- puhelinnumero input kenttä -->
+      <mat-form-field class="numero">
+      <mat-label>Varaajan puhelinnumero</mat-label>
+      <input matInput placeholder="Puh.">
+      </mat-form-field>
+      <br>
+
+      <!-- varattavan laitteen valinta dropmenu -->
+      <h4 class="otsikko">Valitse laite</h4>
+      <mat-form-field>
+          <mat-label>Laitteet</mat-label>
+          <mat-select>
+              <!--
+              @for (item of resItems; track item) {
+                  <mat-option [value]="item.value">
+                      {{item.viewValue}}
+                  </mat-option>
+              }
+              -->
+          </mat-select>
+      </mat-form-field>
+      <br><br>
+
+      <!-- valittu päivä tulee tähän korttiin näkyville. voi tulla myös lisätietoja -->
+      <h4 class="otsikko">Valittu päivä:</h4>
+      <mat-card class="kortti">
+          <mat-card-content>valittu päivä tähän :D</mat-card-content>
+      </mat-card>
+      <br><br>
+
+      <!-- tämä nappi tallentaa varauksen tiedot tietokantaan -->
+      <button mat-raised-button color="primary">Varaa</button>
+      <br><br>
+
+      <!-- Nappi uloskirjautumiseen -->
+      <button mat-raised-button color="primary" (click)="logout()">Kirjaudu ulos</button>
+  </form>
+</div>
