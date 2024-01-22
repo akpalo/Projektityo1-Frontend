@@ -35,6 +35,10 @@ const colors: Record<string, EventColor> = {
   },
 };
 
+interface Item {
+  value: string;
+  viewValue: string;
+}
 @Component({
   selector: 'app-ang-calendar',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -66,6 +70,12 @@ export class AngCalendarComponent {
     action: string;
     event: CalendarEvent;
   } 
+
+  resItems: Item[] = [
+    {value: 'laite-0', viewValue: 'Kamera'},
+    {value: 'laite-1', viewValue: 'Valo'},
+    {value: 'laite-2', viewValue: 'Green screen'},
+  ];
 
   actions: CalendarEventAction[] = [
     {

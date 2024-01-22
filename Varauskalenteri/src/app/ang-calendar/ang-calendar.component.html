@@ -226,13 +226,9 @@
       <mat-form-field>
           <mat-label>Laitteet</mat-label>
           <mat-select>
-              <!--
-              @for (item of resItems; track item) {
-                  <mat-option [value]="item.value">
+                  <mat-option *ngFor="let item of resItems" [value]="item.value">
                       {{item.viewValue}}
                   </mat-option>
-              }
-              -->
           </mat-select>
       </mat-form-field>
       <br><br>

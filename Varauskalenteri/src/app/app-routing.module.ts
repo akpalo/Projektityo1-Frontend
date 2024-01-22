@@ -10,7 +10,7 @@ const routes: Routes = [
   { path: "login", component: LoginComponent },
   { path: "logout", component: LogoutComponent },
   { path: "angcalendar", component: AngCalendarComponent },
-  { path: '', redirectTo: '/kalenteri', pathMatch: 'full' },
+  { path: '', redirectTo: '/angcalendar', pathMatch: 'full' },
 ];
 
 @NgModule({
