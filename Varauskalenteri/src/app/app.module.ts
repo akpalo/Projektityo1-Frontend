@@ -22,7 +22,6 @@ import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
 import { LogoutComponent } from './logout/logout.component';
 import { KalenteriComponent } from './kalenteri/kalenteri.component';
-import { VaraaLaiteComponent } from './varaa-laite/varaa-laite.component';
 import { LoadingComponent } from './loading/loading.component';
 import { AngCalendarComponent } from './ang-calendar/ang-calendar.component';
 
@@ -31,7 +30,6 @@ import { AngCalendarComponent } from './ang-calendar/ang-calendar.component';
     AppComponent,
     LoginComponent,
     LogoutComponent,
-    VaraaLaiteComponent,
     LoadingComponent,
     KalenteriComponent,
     AngCalendarComponent,
