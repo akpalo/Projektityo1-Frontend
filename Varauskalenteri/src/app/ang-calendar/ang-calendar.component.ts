@@ -19,6 +19,9 @@ import {
   CalendarView,
 } from 'angular-calendar';
 import { EventColor } from 'calendar-utils';
+import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
 
 const colors: Record<string, EventColor> = {
   red: {
@@ -56,6 +59,7 @@ interface Item {
       }
     `,
   ],
+  providers: [MatDatepickerModule, MatNativeDateModule]
 })
 export class AngCalendarComponent {
   @ViewChild('modalContent', { static: true }) modalContent: TemplateRef<any> 
@@ -101,7 +105,7 @@ export class AngCalendarComponent {
     {
       start: subDays(startOfDay(new Date()), 1),
       end: addDays(new Date(), 1),
-      title: 'A 3 day event',
+      title: 'Testi',
       color: { ...colors['red'] },
       actions: this.actions,
       allDay: true,
@@ -138,9 +142,31 @@ export class AngCalendarComponent {
     },
   ];
 
-  activeDayIsOpen: boolean = true;
+  activeDayIsOpen: boolean = true; // Kun kalenteri avataan niin tämän päivän tiedot ovat auki
 
-  constructor(private modal: NgbModal, private router: Router) {}
+  /*varausTiedot = { //Tässä pohja varauksen tiedoille, jotka lähetetään metodille, joka lähettää ne backendille
+    puhelinnumero: "",
+    valittuLaite: "",
+    valitutPaivat: {
+      alku: null,
+      loppu: null,
+    },
+  };
+*/
+  varausForm: FormGroup;
+  varausTapahtunut = false;
+
+
+
+  constructor(private modal: NgbModal, private router: Router, private fb: FormBuilder) {
+    this.varausForm = this.fb.group({
+      puhelinnumero: ['', Validators.required],
+      valittuLaite: ['', Validators.required],
+      valitutPaivat: new FormControl<Date | null>(null),
+    });
+
+
+  }
 
   dayClicked({ date, events }: { date: Date; events: CalendarEvent[] }): void {
     if (isSameMonth(date, this.viewDate)) {
@@ -208,6 +234,36 @@ export class AngCalendarComponent {
     this.activeDayIsOpen = false;
 
   }
+
+  
+
+  varaa() {
+    const varausData = {
+      puhelinnumero: this.varausForm.get('puhelinnumero')?.value,
+      valittuLaite: this.varausForm.get('valittuLaite')?.value,
+      valitutPaivat: this.varausForm.get('valitutPaivat')?.value,
+    };
+  
+    const varausJson = JSON.stringify(varausData, null, 4);
+  
+    console.log('Varaustiedot JSON-muodossa:', varausJson);
+    // Lähetä varausdata backendiin tässä vaiheessa
+
+    this.varausTapahtunut = true;
+  }
+
+  varausJson() {
+    const varausData = {
+      puhelinnumero: this.varausForm.get('puhelinnumero')?.value,
+      valittuLaite: this.varausForm.get('valittuLaite')?.value,
+      valitutPaivat: this.varausForm.get('valitutPaivat')?.value,
+    };
+
+    return JSON.stringify(varausData, null, 4);
+  }
+  
+
+  
 
   logout() {
     this.router.navigate(['/logout']);

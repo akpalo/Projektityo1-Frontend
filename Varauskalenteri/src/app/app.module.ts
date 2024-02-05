@@ -10,7 +10,7 @@ import { MatCardModule } from '@angular/material/card';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatGridListModule } from '@angular/material/grid-list';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule,} from '@angular/forms';
 import { MatSelectModule } from '@angular/material/select';
 import { MatIconModule } from '@angular/material/icon';
 import { MatSidenavModule } from '@angular/material/sidenav';
@@ -24,6 +24,11 @@ import { LogoutComponent } from './logout/logout.component';
 import { KalenteriComponent } from './kalenteri/kalenteri.component';
 import { LoadingComponent } from './loading/loading.component';
 import { AngCalendarComponent } from './ang-calendar/ang-calendar.component';
+import { JsonPipe} from '@angular/common';
+import { MatDatepickerModule} from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
+
+
 
 @NgModule({
   declarations: [
@@ -58,6 +63,11 @@ import { AngCalendarComponent } from './ang-calendar/ang-calendar.component';
     MatSnackBarModule,
     NgbModalModule,
     FlatpickrModule.forRoot(),
+    JsonPipe,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    
+
   ],
   providers: [],
   bootstrap: [AppComponent]

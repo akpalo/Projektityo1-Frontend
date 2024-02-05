@@ -213,38 +213,58 @@
 </div>
 
 <div class="alusta">
-  <form class="example-form">
+  <form class="example-form" [formGroup]="varausForm" (ngSubmit)="varaa()" #varausFrom="ngForm">
       <!-- puhelinnumero input kenttä -->
       <mat-form-field class="numero">
       <mat-label>Varaajan puhelinnumero</mat-label>
-      <input matInput placeholder="Puh.">
+      <input matInput placeholder="Puh." formControlName="puhelinnumero" #numeroInput>
       </mat-form-field>
       <br>
 
       <!-- varattavan laitteen valinta dropmenu -->
       <h4 class="otsikko">Valitse laite</h4>
-      <mat-form-field>
-          <mat-label>Laitteet</mat-label>
-          <mat-select>
-                  <mat-option *ngFor="let item of resItems" [value]="item.value">
-                      {{item.viewValue}}
-                  </mat-option>
-          </mat-select>
-      </mat-form-field>
-      <br><br>
+  <mat-form-field>
+    <mat-label>Laitteet</mat-label>
+    <mat-select formControlName="valittuLaite">
+      <mat-option *ngFor="let item of resItems" [value]="item.value">
+        {{item.viewValue}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+  <br><br>
 
       <!-- valittu päivä tulee tähän korttiin näkyville. voi tulla myös lisätietoja -->
-      <h4 class="otsikko">Valittu päivä:</h4>
-      <mat-card class="kortti">
-          <mat-card-content>valittu päivä tähän :D</mat-card-content>
-      </mat-card>
-      <br><br>
+      <mat-form-field>
+        <mat-label>Valitse päivämääräväli</mat-label>
+        <mat-date-range-input [formGroup]="varausForm" [rangePicker]="picker">
+          <input matStartDate formControlName="valitutPaivat" placeholder="Alkupäivä">
+          <input matEndDate formControlName="valitutPaivat" placeholder="Loppupäivä">
+        </mat-date-range-input>
+        <mat-hint>PP/KK/VVVV - PP/KK/VVVV</mat-hint>
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-date-range-picker #picker></mat-date-range-picker>
+      
+        <mat-error *ngIf="varausForm.get('valitutPaivat')?.hasError('matStartDateInvalid')">
+          Virheellinen alkupäivä
+        </mat-error>
+        <mat-error *ngIf="varausForm.get('valitutPaivat')?.hasError('matEndDateInvalid')">
+          Virheellinen loppupäivä
+        </mat-error>
+      </mat-form-field>
+  <br><br>
 
       <!-- tämä nappi tallentaa varauksen tiedot tietokantaan -->
-      <button mat-raised-button color="primary">Varaa</button>
-      <br><br>
+  <button mat-raised-button color="primary" type="submit" [disabled]="!varausForm.valid" >Varaa</button>
+  <br><br>
 
       <!-- Nappi uloskirjautumiseen -->
       <button mat-raised-button color="primary" (click)="logout()">Kirjaudu ulos</button>
   </form>
+</div>
+
+      <!--Data JSON-muodossa testausta varten-->
+<div class ="jsonData" *ngIf="varausTapahtunut">
+  <pre>
+    {{ varausJson() }}
+  </pre>
 </div>

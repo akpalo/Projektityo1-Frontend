@@ -11,3 +11,12 @@
     float: right;
     right: 30px;
   }
+
+.jsonData {
+    width: 35%;
+    background-color: #d4d2d2;
+    padding: 30px;
+    position: relative;
+    float: right;
+    right: 30px;
+}
