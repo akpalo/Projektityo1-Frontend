@@ -144,19 +144,8 @@ export class AngCalendarComponent {
 
   activeDayIsOpen: boolean = true; // Kun kalenteri avataan niin tämän päivän tiedot ovat auki
 
-  /*varausTiedot = { //Tässä pohja varauksen tiedoille, jotka lähetetään metodille, joka lähettää ne backendille
-    puhelinnumero: "",
-    valittuLaite: "",
-    valitutPaivat: {
-      alku: null,
-      loppu: null,
-    },
-  };
-*/
   varausForm: FormGroup;
   varausTapahtunut = false;
-
-
 
   constructor(private modal: NgbModal, private router: Router, private fb: FormBuilder) {
     this.varausForm = this.fb.group({
@@ -164,7 +153,7 @@ export class AngCalendarComponent {
       valittuLaite: ['', Validators.required],
       valitutPaivat: new FormControl<Date | null>(null),
     });
-
+1
 
   }
 
@@ -262,9 +251,6 @@ export class AngCalendarComponent {
     return JSON.stringify(varausData, null, 4);
   }
   
-
-  
-
   logout() {
     this.router.navigate(['/logout']);
   }
