@@ -27,6 +27,7 @@ import { AngCalendarComponent } from './ang-calendar/ang-calendar.component';
 import { JsonPipe} from '@angular/common';
 import { MatDatepickerModule} from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
+import { MAT_DATE_LOCALE } from '@angular/material/core';
 
 
 
@@ -69,7 +70,7 @@ import { MatNativeDateModule } from '@angular/material/core';
     
 
   ],
-  providers: [],
+  providers: [{provide: MAT_DATE_LOCALE, useValue: 'fi-FI'}],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
