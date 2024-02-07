@@ -1,4 +1,4 @@
-import { Component, ChangeDetectionStrategy, ViewChild, TemplateRef} from '@angular/core';
+import { Component, ChangeDetectionStrategy, ViewChild, TemplateRef } from '@angular/core';
 import { Router } from '@angular/router';
 import {
   startOfDay,
@@ -62,7 +62,7 @@ interface Item {
   providers: [MatDatepickerModule, MatNativeDateModule]
 })
 export class AngCalendarComponent {
-  @ViewChild('modalContent', { static: true }) modalContent: TemplateRef<any> 
+  @ViewChild('modalContent', { static: true }) modalContent: TemplateRef<any>
 
   view: CalendarView = CalendarView.Month;
 
@@ -73,12 +73,12 @@ export class AngCalendarComponent {
   modalData: {
     action: string;
     event: CalendarEvent;
-  } 
+  }
 
   resItems: Item[] = [
-    {value: 'laite-0', viewValue: 'Kamera'},
-    {value: 'laite-1', viewValue: 'Valo'},
-    {value: 'laite-2', viewValue: 'Green screen'},
+    { value: 'laite-0', viewValue: 'Kamera' },
+    { value: 'laite-1', viewValue: 'Valo' },
+    { value: 'laite-2', viewValue: 'Green screen' },
   ];
 
   actions: CalendarEventAction[] = [
@@ -162,8 +162,10 @@ export class AngCalendarComponent {
     this.varausForm = this.fb.group({
       puhelinnumero: ['', Validators.required],
       valittuLaite: ['', Validators.required],
-      valitutPaivat: new FormControl<Date | null>(null),
+      alkupaiva: [null], // Alkupäivän form control
+      loppupaiva: [null] // Loppupäivän form control
     });
+
 
 
   }
@@ -235,17 +237,18 @@ export class AngCalendarComponent {
 
   }
 
-  
+
 
   varaa() {
     const varausData = {
       puhelinnumero: this.varausForm.get('puhelinnumero')?.value,
       valittuLaite: this.varausForm.get('valittuLaite')?.value,
-      valitutPaivat: this.varausForm.get('valitutPaivat')?.value,
+      alkupaiva: this.varausForm.get('alkupaiva')?.value,
+      loppupaiva: this.varausForm.get('loppupaiva')?.value
     };
-  
+
     const varausJson = JSON.stringify(varausData, null, 4);
-  
+
     console.log('Varaustiedot JSON-muodossa:', varausJson);
     // Lähetä varausdata backendiin tässä vaiheessa
 
@@ -256,14 +259,15 @@ export class AngCalendarComponent {
     const varausData = {
       puhelinnumero: this.varausForm.get('puhelinnumero')?.value,
       valittuLaite: this.varausForm.get('valittuLaite')?.value,
-      valitutPaivat: this.varausForm.get('valitutPaivat')?.value,
+      alkupaiva: this.varausForm.get('alkupaiva')?.value,
+      loppupaiva: this.varausForm.get('loppupaiva')?.value
     };
 
     return JSON.stringify(varausData, null, 4);
   }
-  
 
-  
+
+
 
   logout() {
     this.router.navigate(['/logout']);
