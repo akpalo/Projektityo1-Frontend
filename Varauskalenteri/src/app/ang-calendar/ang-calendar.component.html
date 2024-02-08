@@ -170,7 +170,8 @@
     <br><br>
 
     <!-- tämä nappi tallentaa varauksen tiedot tietokantaan -->
-    <button mat-raised-button color="primary" type="submit" [disabled]="!varausForm.valid">Varaa</button>
+    <button mat-raised-button color="primary" (click)="addEvent()" type="submit"
+      [disabled]="!varausForm.valid">Varaa</button>
     <br><br>
 
     <!-- Nappi uloskirjautumiseen -->

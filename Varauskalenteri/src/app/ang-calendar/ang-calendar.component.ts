@@ -76,9 +76,9 @@ export class AngCalendarComponent {
   }
 
   resItems: Item[] = [
-    { value: 'laite-0', viewValue: 'Kamera' },
-    { value: 'laite-1', viewValue: 'Valo' },
-    { value: 'laite-2', viewValue: 'Green screen' },
+    { value: 'Kamera', viewValue: 'Kamera' },
+    { value: 'Valo', viewValue: 'Valo' },
+    { value: 'Green screen', viewValue: 'Green screen' },
   ];
 
   actions: CalendarEventAction[] = [
@@ -101,48 +101,11 @@ export class AngCalendarComponent {
 
   refresh = new Subject<void>();
 
-  events: CalendarEvent[] = [
-    {
-      start: subDays(startOfDay(new Date()), 1),
-      end: addDays(new Date(), 1),
-      title: 'Testi',
-      color: { ...colors['red'] },
-      actions: this.actions,
-      allDay: true,
-      resizable: {
-        beforeStart: true,
-        afterEnd: true,
-      },
-      draggable: true,
-    },
-    {
-      start: startOfDay(new Date()),
-      title: 'An event with no end date',
-      color: { ...colors['yellow'] },
-      actions: this.actions,
-    },
-    {
-      start: subDays(endOfMonth(new Date()), 3),
-      end: addDays(endOfMonth(new Date()), 3),
-      title: 'A long event that spans 2 months',
-      color: { ...colors['blue'] },
-      allDay: true,
-    },
-    {
-      start: addHours(startOfDay(new Date()), 2),
-      end: addHours(new Date(), 2),
-      title: 'A draggable and resizable event',
-      color: { ...colors['yellow'] },
-      actions: this.actions,
-      resizable: {
-        beforeStart: true,
-        afterEnd: true,
-      },
-      draggable: true,
-    },
+  events: CalendarEvent[] = [  //Taulukko lähes tyhjä, esimerkki-eventtejä vanhasta kalenterista
+
   ];
 
-  activeDayIsOpen: boolean = true; // Kun kalenteri avataan niin tämän päivän tiedot ovat auki
+  activeDayIsOpen: boolean = false; // Kun kalenteri avataan niin tämän päivän tiedot ovat auki
 
   varausForm: FormGroup;
   varausTapahtunut = false;
@@ -200,11 +163,11 @@ export class AngCalendarComponent {
     this.events = [
       ...this.events,
       {
-        title: 'New event',
-        start: startOfDay(new Date()),
-        end: endOfDay(new Date()),
+        title: this.varausForm.get('valittuLaite')?.value,
+        start: this.varausForm.get('alkupaiva')?.value,
+        end: this.varausForm.get('loppupaiva')?.value,
         color: colors['red'],
-        draggable: true,
+        draggable: false,
         resizable: {
           beforeStart: true,
           afterEnd: true,
