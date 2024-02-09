@@ -197,7 +197,7 @@ export class AngCalendarComponent {
   }
 
 
-
+  //HUOM: VARAA METODI ON VIELÄ PAHASTI KESKEN!!
   varaa() {
     const puhelinnumero = this.varausForm.get('puhelinnumero')?.value;
     const valittuLaite = this.varausForm.get('valittuLaite')?.value;
@@ -212,10 +212,13 @@ export class AngCalendarComponent {
       endTime: loppupaiva
     };
 
+    
+
     this.reservationService.addReservation(varausData).subscribe({
       next: (response) => {
         console.log('Varaus lähetetty backendille', response);
         // Tee jotain, kun varaus on lähetetty onnistuneesti
+        this.varausTapahtunut = true;
       },
       error: (error) => {
         console.error('Virhe varauksen lähettämisessä:', error);
@@ -225,6 +228,7 @@ export class AngCalendarComponent {
         console.log("Varaus tehty onnistuneesti!")
       }
     });
+    
   }
 
 
@@ -238,12 +242,6 @@ export class AngCalendarComponent {
 
     return JSON.stringify(varausData, null, 4);
   }
-
-  errorJson() {
-
-  }
-
-
 
   logout() {
     this.router.navigate(['/logout']);
