@@ -10,7 +10,7 @@ import { MatCardModule } from '@angular/material/card';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatGridListModule } from '@angular/material/grid-list';
-import { FormsModule, ReactiveFormsModule,} from '@angular/forms';
+import { FormsModule, ReactiveFormsModule, } from '@angular/forms';
 import { MatSelectModule } from '@angular/material/select';
 import { MatIconModule } from '@angular/material/icon';
 import { MatSidenavModule } from '@angular/material/sidenav';
@@ -24,10 +24,12 @@ import { LogoutComponent } from './logout/logout.component';
 import { KalenteriComponent } from './kalenteri/kalenteri.component';
 import { LoadingComponent } from './loading/loading.component';
 import { AngCalendarComponent } from './ang-calendar/ang-calendar.component';
-import { JsonPipe} from '@angular/common';
-import { MatDatepickerModule} from '@angular/material/datepicker';
+import { JsonPipe } from '@angular/common';
+import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MAT_DATE_LOCALE } from '@angular/material/core';
+import { ReservationService } from './services/reservation.service';
+import { ApplicationConfig } from '@angular/core';
 
 
 
@@ -67,10 +69,10 @@ import { MAT_DATE_LOCALE } from '@angular/material/core';
     JsonPipe,
     MatDatepickerModule,
     MatNativeDateModule,
-    
+
 
   ],
-  providers: [{provide: MAT_DATE_LOCALE, useValue: 'fi-FI'}],
+  providers: [{ provide: MAT_DATE_LOCALE, useValue: 'fi-FI' }, ReservationService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

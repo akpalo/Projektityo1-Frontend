@@ -185,3 +185,10 @@
     {{ varausJson() }}
   </pre>
 </div>
+
+<!--Data JSON-muodossa testausta varten-->
+<div class="errorData" *ngIf="varausEiTapahtunut">
+  <pre>
+    {{ errorJson() }}
+  </pre>
+</div>
