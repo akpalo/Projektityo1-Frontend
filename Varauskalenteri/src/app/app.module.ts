@@ -31,6 +31,7 @@ import { MAT_DATE_LOCALE } from '@angular/material/core';
 import { ReservationService } from './services/reservation.service';
 import { ApplicationConfig } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
+import { ApiModule } from './api/api.module';
 
 
 
@@ -71,6 +72,7 @@ import { HttpClientModule } from '@angular/common/http';
     MatDatepickerModule,
     MatNativeDateModule,
     HttpClientModule,
+    ApiModule.forRoot({ rootUrl: 'https://www.example.com/api'})
 
 
   ],
