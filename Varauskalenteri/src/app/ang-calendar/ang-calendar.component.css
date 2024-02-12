@@ -5,6 +5,12 @@
     margin-left: 20px;
 }
 
+.varaus {
+    float: left;
+    margin-left: 20px;
+    margin-top: 20px;
+}
+
 .jsonData {
     width: 35%;
     background-color: #d4d2d2;

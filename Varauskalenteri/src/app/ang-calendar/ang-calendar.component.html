@@ -1,4 +1,5 @@
 <div class="kalenteri">
+
   <div class="row text-center">
     <div class="col-md-4">
       <div class="btn-group">
@@ -32,7 +33,9 @@
       </div>
     </div>
   </div>
+
   <br />
+
   <div [ngSwitch]="view">
     <mwl-calendar-month-view *ngSwitchCase="CalendarView.Month" [viewDate]="viewDate" [events]="events"
       [refresh]="refresh" [activeDayIsOpen]="activeDayIsOpen" (dayClicked)="dayClicked($event.day)"
@@ -131,7 +134,7 @@
 
 </div>
 
-<app-varaus></app-varaus>
+<app-varaus class="varaus"></app-varaus>
 
 <!--Data JSON-muodossa testausta varten- ->
 <div class="jsonData" *ngIf="varausTapahtunut">
