@@ -1,15 +1,8 @@
 .kalenteri {
     width: 60%;
     float: left;
-}
-
-.alusta {
-    width: 35%;
-    background-color: #d4d2d2;
-    padding: 30px;
-    position: relative;
-    float: right;
-    right: 30px;
+    margin-top: 20px;
+    margin-left: 20px;
 }
 
 .jsonData {

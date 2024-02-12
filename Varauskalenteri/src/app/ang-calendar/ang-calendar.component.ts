@@ -19,10 +19,10 @@ import {
   CalendarView,
 } from 'angular-calendar';
 import { EventColor } from 'calendar-utils';
-import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
-import { ReservationService } from '../services/reservation.service';
+
+import { VarausComponent } from '../varaus/varaus.component';
 
 const colors: Record<string, EventColor> = {
   red: {
@@ -39,10 +39,13 @@ const colors: Record<string, EventColor> = {
   },
 };
 
+/*
 interface Item {
   value: string;
   viewValue: string;
 }
+*/
+
 @Component({
   selector: 'app-ang-calendar',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -76,11 +79,13 @@ export class AngCalendarComponent {
     event: CalendarEvent;
   }
 
+/*
   resItems: Item[] = [
     { value: 'Kamera', viewValue: 'Kamera' },
     { value: 'Valo', viewValue: 'Valo' },
     { value: 'Green screen', viewValue: 'Green screen' },
   ];
+*/
 
   actions: CalendarEventAction[] = [
     {
@@ -108,19 +113,10 @@ export class AngCalendarComponent {
 
   activeDayIsOpen: boolean = false; // Kun kalenteri avataan niin tämän päivän tiedot ovat auki
 
-  varausForm: FormGroup;
-  varausTapahtunut = false;
-
-  constructor(private modal: NgbModal, private router: Router, private fb: FormBuilder, private reservationService: ReservationService) {
-    this.varausForm = this.fb.group({
-      puhelinnumero: ['', Validators.required],
-      valittuLaite: ['', Validators.required],
-      alkupaiva: [null], // Alkupäivän form control
-      loppupaiva: [null] // Loppupäivän form control
-    });
 
 
-
+  constructor(private modal: NgbModal, private router: Router) {
+    
   }
 
   dayClicked({ date, events }: { date: Date; events: CalendarEvent[] }): void {
@@ -160,6 +156,8 @@ export class AngCalendarComponent {
     this.modal.open(this.modalContent, { size: 'lg' });
   }
 
+  //TÄÄ KUNTOON KUN HTTP PYYNNÖT TOIMII
+/*
   addEvent(): void {
     this.events = [
       ...this.events,
@@ -176,6 +174,7 @@ export class AngCalendarComponent {
       },
     ];
   }
+*/
 
   deleteEvent(eventToDelete: CalendarEvent) {
     this.events = this.events.filter((event) => event !== eventToDelete);
@@ -190,48 +189,7 @@ export class AngCalendarComponent {
 
   }
 
-  generateReservationId(): number {
-    // Tässä voit toteuttaa logiikan, jolla generoit uuden varausnumeron
-    // Esimerkiksi voit käyttää aikaleimoja tai satunnaislukuja
-    return Math.floor(Math.random() * 1000); // Esimerkkinä generoidaan satunnainen numero välillä 0-999
-  }
-
-
-  //HUOM: VARAA METODI ON VIELÄ PAHASTI KESKEN!!
-  varaa() {
-    const puhelinnumero = this.varausForm.get('puhelinnumero')?.value;
-    const valittuLaite = this.varausForm.get('valittuLaite')?.value;
-    const alkupaiva = this.varausForm.get('alkupaiva')?.value;
-    const loppupaiva = this.varausForm.get('loppupaiva')?.value;
-
-    const varausData = {
-      id: this.generateReservationId(), // Generoi varausnumero
-      owner: puhelinnumero,
-      target: valittuLaite,
-      startTime: alkupaiva,
-      endTime: loppupaiva
-    };
-
-    
-
-    this.reservationService.addReservation(varausData).subscribe({
-      next: (response) => {
-        console.log('Varaus lähetetty backendille', response);
-        // Tee jotain, kun varaus on lähetetty onnistuneesti
-        this.varausTapahtunut = true;
-      },
-      error: (error) => {
-        console.error('Virhe varauksen lähettämisessä:', error);
-        // Tähän mitä tehdään, jos varauksen tekemisessä tulee virhe
-      },
-      complete: () => {
-        console.log("Varaus tehty onnistuneesti!")
-      }
-    });
-    
-  }
-
-
+/*
   varausJson() {
     const varausData = {
       puhelinnumero: this.varausForm.get('puhelinnumero')?.value,
@@ -242,8 +200,7 @@ export class AngCalendarComponent {
 
     return JSON.stringify(varausData, null, 4);
   }
+*/
 
-  logout() {
-    this.router.navigate(['/logout']);
-  }
+
 }

@@ -32,6 +32,7 @@ import { ReservationService } from './services/reservation.service';
 import { ApplicationConfig } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 import { ApiModule } from './api/api.module';
+import { VarausComponent } from './varaus/varaus.component';
 
 
 
@@ -43,6 +44,7 @@ import { ApiModule } from './api/api.module';
     LoadingComponent,
     KalenteriComponent,
     AngCalendarComponent,
+    VarausComponent,
 
   ],
   imports: [
@@ -73,7 +75,6 @@ import { ApiModule } from './api/api.module';
     MatNativeDateModule,
     HttpClientModule,
     ApiModule.forRoot({ rootUrl: 'https://www.example.com/api'})
-
 
   ],
   providers: [{ provide: MAT_DATE_LOCALE, useValue: 'fi-FI' }, ReservationService],

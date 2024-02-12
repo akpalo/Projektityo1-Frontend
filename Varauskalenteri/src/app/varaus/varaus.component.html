@@ -1,0 +1,48 @@
+<div class="alusta">
+  <form class="example-form" [formGroup]="varausForm" (ngSubmit)="varaa()" #varausFrom="ngForm">
+    <!-- puhelinnumero input kenttä -->
+    <mat-form-field class="numero">
+      <mat-label>Varaajan puhelinnumero</mat-label>
+      <input matInput placeholder="Puh." formControlName="puhelinnumero" #numeroInput>
+    </mat-form-field>
+    <br>
+
+    <!-- varattavan laitteen valinta dropmenu -->
+    <h4 class="otsikko">Valitse laite</h4>
+    <mat-form-field>
+      <mat-label>Laitteet</mat-label>
+      <mat-select formControlName="valittuLaite">
+        <mat-option *ngFor="let item of resItems" [value]="item.value">
+          {{item.viewValue}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <br><br>
+
+    <!-- valittu päivä tulee tähän korttiin näkyville. voi tulla myös lisätietoja -->
+    <mat-form-field>
+      <mat-label>Valitse alkupäivä</mat-label>
+      <input matInput [matDatepicker]="startDatePicker" formControlName="alkupaiva" placeholder="Valitse alkupäivä">
+      <mat-datepicker-toggle matSuffix [for]="startDatePicker"></mat-datepicker-toggle>
+      <mat-datepicker #startDatePicker></mat-datepicker>
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Valitse loppupäivä</mat-label>
+      <input matInput [matDatepicker]="endDatePicker" formControlName="loppupaiva" placeholder="Valitse loppupäivä">
+      <mat-datepicker-toggle matSuffix [for]="endDatePicker"></mat-datepicker-toggle>
+      <mat-datepicker #endDatePicker></mat-datepicker>
+    </mat-form-field>
+
+    <br><br>
+
+    <!-- tämä nappi tallentaa varauksen tiedot tietokantaan -->
+    <button mat-raised-button color="primary" type="submit"
+      [disabled]="!varausForm.valid">Varaa</button>
+    <br><br>
+
+    <!-- Nappi uloskirjautumiseen - ->
+    <button mat-raised-button color="primary" (click)="logout()">Kirjaudu ulos</button>
+    -->
+  </form>
+</div>
