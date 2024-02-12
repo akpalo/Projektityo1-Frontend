@@ -42,10 +42,6 @@ export class VarausComponent {
     });
   }
 
-  päivät(){
-    
-  }
-
   //HUOM: VARAA METODI ON VIELÄ PAHASTI KESKEN!!
   varaa() {
     const puhelinnumero = this.varausForm.get('puhelinnumero')?.value;
