@@ -72,7 +72,7 @@ import { ApiModule } from './api/api.module';
     MatDatepickerModule,
     MatNativeDateModule,
     HttpClientModule,
-    ApiModule.forRoot({ rootUrl: 'https://www.example.com/api'})
+    ApiModule.forRoot({ rootUrl: 'https://localhost:7142/api' })
 
 
   ],

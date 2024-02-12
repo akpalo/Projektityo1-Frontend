@@ -23,6 +23,7 @@ import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms'
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { ReservationService } from '../services/reservation.service';
+import { DataService } from '../services/data.service';
 
 const colors: Record<string, EventColor> = {
   red: {
@@ -77,9 +78,9 @@ export class AngCalendarComponent {
   }
 
   resItems: Item[] = [
-    { value: 'Kamera', viewValue: 'Kamera' },
-    { value: 'Valo', viewValue: 'Valo' },
-    { value: 'Green screen', viewValue: 'Green screen' },
+    { value: '1', viewValue: 'Kamera' },
+    { value: '2', viewValue: 'Valo' },
+    { value: '3', viewValue: 'Green screen' },
   ];
 
   actions: CalendarEventAction[] = [
@@ -111,7 +112,7 @@ export class AngCalendarComponent {
   varausForm: FormGroup;
   varausTapahtunut = false;
 
-  constructor(private modal: NgbModal, private router: Router, private fb: FormBuilder, private reservationService: ReservationService) {
+  constructor(private modal: NgbModal, private router: Router, private fb: FormBuilder, private dataService: DataService) {
     this.varausForm = this.fb.group({
       puhelinnumero: ['', Validators.required],
       valittuLaite: ['', Validators.required],
@@ -190,12 +191,6 @@ export class AngCalendarComponent {
 
   }
 
-  generateReservationId(): number {
-    // Tässä voit toteuttaa logiikan, jolla generoit uuden varausnumeron
-    // Esimerkiksi voit käyttää aikaleimoja tai satunnaislukuja
-    return Math.floor(Math.random() * 1000); // Esimerkkinä generoidaan satunnainen numero välillä 0-999
-  }
-
 
   //HUOM: VARAA METODI ON VIELÄ PAHASTI KESKEN!!
   varaa() {
@@ -205,16 +200,15 @@ export class AngCalendarComponent {
     const loppupaiva = this.varausForm.get('loppupaiva')?.value;
 
     const varausData = {
-      id: this.generateReservationId(), // Generoi varausnumero
       owner: puhelinnumero,
       target: valittuLaite,
       startTime: alkupaiva,
       endTime: loppupaiva
     };
 
-    
 
-    this.reservationService.addReservation(varausData).subscribe({
+
+    this.dataService.postReservation(varausData).subscribe({
       next: (response) => {
         console.log('Varaus lähetetty backendille', response);
         // Tee jotain, kun varaus on lähetetty onnistuneesti
@@ -222,13 +216,14 @@ export class AngCalendarComponent {
       },
       error: (error) => {
         console.error('Virhe varauksen lähettämisessä:', error);
+        console.log("Varausdata: ", varausData);
         // Tähän mitä tehdään, jos varauksen tekemisessä tulee virhe
       },
       complete: () => {
         console.log("Varaus tehty onnistuneesti!")
       }
     });
-    
+
   }
 
 
