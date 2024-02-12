@@ -21,7 +21,8 @@ import {
 import { EventColor } from 'calendar-utils';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
-
+import { ReservationService } from '../services/reservation.service';
+import { DataService } from '../services/data.service';
 import { VarausComponent } from '../varaus/varaus.component';
 
 const colors: Record<string, EventColor> = {
@@ -81,9 +82,9 @@ export class AngCalendarComponent {
 
 /*
   resItems: Item[] = [
-    { value: 'Kamera', viewValue: 'Kamera' },
-    { value: 'Valo', viewValue: 'Valo' },
-    { value: 'Green screen', viewValue: 'Green screen' },
+    { value: '1', viewValue: 'Kamera' },
+    { value: '2', viewValue: 'Valo' },
+    { value: '3', viewValue: 'Green screen' },
   ];
 */
 

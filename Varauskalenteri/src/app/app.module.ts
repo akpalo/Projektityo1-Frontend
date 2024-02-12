@@ -74,7 +74,7 @@ import { VarausComponent } from './varaus/varaus.component';
     MatDatepickerModule,
     MatNativeDateModule,
     HttpClientModule,
-    ApiModule.forRoot({ rootUrl: 'https://www.example.com/api'})
+    ApiModule.forRoot({ rootUrl: 'https://localhost:7142/api' })
 
   ],
   providers: [{ provide: MAT_DATE_LOCALE, useValue: 'fi-FI' }, ReservationService],
