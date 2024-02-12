@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
-import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
 import { ReservationService } from '../services/reservation.service';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
+import { Router } from '@angular/router';
 
 interface Item {
   value: string;
@@ -27,7 +27,7 @@ export class VarausComponent {
   varausForm: FormGroup;
   varausTapahtunut = false;
 
-  constructor(private fb: FormBuilder, private reservationService: ReservationService) {
+  constructor(private router: Router,private fb: FormBuilder, private reservationService: ReservationService) {
     this.varausForm = this.fb.group({
       puhelinnumero: ['', Validators.required],
       valittuLaite: ['', Validators.required],
@@ -66,9 +66,9 @@ export class VarausComponent {
     });
   }
 
-  /*LOGOUT
+  
   logout() {
     this.router.navigate(['/logout']);
   }
-  */
+  
 }
