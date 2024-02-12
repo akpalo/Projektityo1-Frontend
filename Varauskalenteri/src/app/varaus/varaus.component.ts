@@ -58,6 +58,7 @@ export class VarausComponent {
       },
       error: (error) => {
         console.error('Virhe varauksen lähettämisessä:', error);
+        console.log(varausData);
         // Tähän mitä tehdään, jos varauksen tekemisessä tulee virhe
       },
       complete: () => {

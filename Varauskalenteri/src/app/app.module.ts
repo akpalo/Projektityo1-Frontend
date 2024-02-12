@@ -30,7 +30,8 @@ import { MatNativeDateModule } from '@angular/material/core';
 import { MAT_DATE_LOCALE } from '@angular/material/core';
 import { ReservationService } from './services/reservation.service';
 import { ApplicationConfig } from '@angular/core';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { ApiInterceptor } from './services/api-interceptor.service';
 import { ApiModule } from './api/api.module';
 import { VarausComponent } from './varaus/varaus.component';
 
@@ -77,7 +78,11 @@ import { VarausComponent } from './varaus/varaus.component';
     ApiModule.forRoot({ rootUrl: 'https://localhost:7142/api' })
 
   ],
-  providers: [{ provide: MAT_DATE_LOCALE, useValue: 'fi-FI' }, ReservationService],
+  providers: [
+    { provide: MAT_DATE_LOCALE, useValue: 'fi-FI' },
+    ReservationService,
+    { provide: HTTP_INTERCEPTORS, useClass: ApiInterceptor, multi: true },
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
