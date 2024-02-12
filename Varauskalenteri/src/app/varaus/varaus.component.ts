@@ -4,6 +4,7 @@ import { ReservationService } from '../services/reservation.service';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { Router } from '@angular/router';
+import { DateFormatPipe } from '../date-format.pipe';
 
 interface Item {
   value: string;
@@ -13,7 +14,8 @@ interface Item {
 @Component({
   selector: 'app-varaus',
   templateUrl: './varaus.component.html',
-  styleUrls: ['./varaus.component.css']
+  styleUrls: ['./varaus.component.css'],
+  providers: [DateFormatPipe]
 })
 
 export class VarausComponent {
@@ -27,13 +29,21 @@ export class VarausComponent {
   varausForm: FormGroup;
   varausTapahtunut = false;
 
-  constructor(private router: Router,private fb: FormBuilder, private reservationService: ReservationService) {
+  
+  
+
+  constructor(private router: Router,private fb: FormBuilder, private reservationService: ReservationService, private dateFormatPipe: DateFormatPipe) {
     this.varausForm = this.fb.group({
       puhelinnumero: ['', Validators.required],
       valittuLaite: ['', Validators.required],
-      alkupaiva: [null], // Alkupäivän form control
-      loppupaiva: [null] // Loppupäivän form control
+      alkupaiva: [''], // Alkupäivän form control
+      loppupaiva: [''] // Loppupäivän form control
+      
     });
+  }
+
+  päivät(){
+    
   }
 
   //HUOM: VARAA METODI ON VIELÄ PAHASTI KESKEN!!
@@ -43,12 +53,22 @@ export class VarausComponent {
     const alkupaiva = this.varausForm.get('alkupaiva')?.value;
     const loppupaiva = this.varausForm.get('loppupaiva')?.value;
 
+    console.log('Varauslomakkeen tiedot:', puhelinnumero, valittuLaite, alkupaiva, loppupaiva);
+    
+
+    const formattedAlku = this.dateFormatPipe.transform(alkupaiva);
+    const formattedLoppu = this.dateFormatPipe.transform(loppupaiva);
+
+    console.log('Varauksen alkuaika:', formattedAlku);
+
     const varausData = {
-      owner: puhelinnumero,
       target: valittuLaite,
-      startTime: alkupaiva,
-      endTime: loppupaiva
+      owner: puhelinnumero,
+      startTime: formattedAlku,
+      endTime: formattedLoppu
     };
+
+    console.log('Lähetetään varaus backendille:', varausData);
 
     this.reservationService.addReservation(varausData).subscribe({
       next: (response) => {

@@ -34,6 +34,7 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { ApiInterceptor } from './services/api-interceptor.service';
 import { ApiModule } from './api/api.module';
 import { VarausComponent } from './varaus/varaus.component';
+import { DateFormatPipe } from './date-format.pipe';
 
 
 
@@ -46,6 +47,7 @@ import { VarausComponent } from './varaus/varaus.component';
     KalenteriComponent,
     AngCalendarComponent,
     VarausComponent,
+    DateFormatPipe,
 
   ],
   imports: [
@@ -79,9 +81,10 @@ import { VarausComponent } from './varaus/varaus.component';
 
   ],
   providers: [
-    { provide: MAT_DATE_LOCALE, useValue: 'fi-FI' },
+    
     ReservationService,
     { provide: HTTP_INTERCEPTORS, useClass: ApiInterceptor, multi: true },
+    DateFormatPipe
   ],
   bootstrap: [AppComponent]
 })
