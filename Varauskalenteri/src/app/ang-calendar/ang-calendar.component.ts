@@ -1,4 +1,4 @@
-import { Component, ChangeDetectionStrategy, ViewChild, TemplateRef } from '@angular/core';
+import { Component, ChangeDetectionStrategy, ViewChild, TemplateRef, Input, EventEmitter, Output } from '@angular/core';
 import { Router } from '@angular/router';
 import { startOfDay, endOfDay, subDays, addDays, endOfMonth, isSameDay, isSameMonth, addHours } from 'date-fns';
 import { Subject } from 'rxjs';
@@ -10,6 +10,8 @@ import { MatNativeDateModule } from '@angular/material/core';
 import { ReservationService } from '../services/reservation.service';
 import { DataService } from '../services/data.service';
 import { VarausComponent } from '../varaus/varaus.component';
+
+
 
 
 const colors: Record<string, EventColor> = {
@@ -80,11 +82,11 @@ export class AngCalendarComponent {
   refresh = new Subject<void>();
 
   // Esimerkki eventit:
-  events: CalendarEvent[] = [ ];
+  events: CalendarEvent[] = [];
 
 
   // Kun kalenteri avataan niin tämän päivän tiedot ovat auki
-  activeDayIsOpen: boolean = false; 
+  activeDayIsOpen: boolean = false;
 
 
   constructor(private modal: NgbModal, private router: Router) { }
@@ -127,21 +129,28 @@ export class AngCalendarComponent {
 
 
   // Uuden tapahtuman lisäys kalenteriin varauksen tapahtuessa. TÄÄ KUNTOON KUN HTTP PYYNNÖT TOIMII !!
-  /*
+
+  @Input() target: string;
+  @Input() startTime: Date;
+  @Input() endTime: Date;
+
+  @Output() addEventTrigger = new EventEmitter<void>();
+
   addEvent(): void {
     this.events = [
       ...this.events,
       {
-        title: this.varausForm.get('valittuLaite')?.value,
-        start: this.varausForm.get('alkupaiva')?.value,
-        end: this.varausForm.get('loppupaiva')?.value,
+        title: this.target,
+        start: this.startTime,
+        end: this.endTime,
         color: colors['red'],
         draggable: false,
         resizable: { beforeStart: true, afterEnd: true },
       },
     ];
+    this.addEventTrigger.emit();
   }
-  */
+
 
 
   deleteEvent(eventToDelete: CalendarEvent) {
@@ -159,17 +168,17 @@ export class AngCalendarComponent {
   }
 
 
-/* Varauksen tietojen tulostaminen JSON muodossa tarkastelua varten. Poista kun ei enää tarvitse!
-  varausJson() {
-    const varausData = {
-      puhelinnumero: this.varausForm.get('puhelinnumero')?.value,
-      valittuLaite: this.varausForm.get('valittuLaite')?.value,
-      alkupaiva: this.varausForm.get('alkupaiva')?.value,
-      loppupaiva: this.varausForm.get('loppupaiva')?.value
-    };
-
-    return JSON.stringify(varausData, null, 4);
-  }
-*/
+  /* Varauksen tietojen tulostaminen JSON muodossa tarkastelua varten. Poista kun ei enää tarvitse!
+    varausJson() {
+      const varausData = {
+        puhelinnumero: this.varausForm.get('puhelinnumero')?.value,
+        valittuLaite: this.varausForm.get('valittuLaite')?.value,
+        alkupaiva: this.varausForm.get('alkupaiva')?.value,
+        loppupaiva: this.varausForm.get('loppupaiva')?.value
+      };
+  
+      return JSON.stringify(varausData, null, 4);
+    }
+  */
 
 }
