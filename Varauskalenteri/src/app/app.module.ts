@@ -21,7 +21,6 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
 import { LogoutComponent } from './logout/logout.component';
-import { KalenteriComponent } from './kalenteri/kalenteri.component';
 import { LoadingComponent } from './loading/loading.component';
 import { AngCalendarComponent } from './ang-calendar/ang-calendar.component';
 import { JsonPipe } from '@angular/common';
@@ -44,7 +43,6 @@ import { DateFormatPipe } from './date-format.pipe';
     LoginComponent,
     LogoutComponent,
     LoadingComponent,
-    KalenteriComponent,
     AngCalendarComponent,
     VarausComponent,
     DateFormatPipe,

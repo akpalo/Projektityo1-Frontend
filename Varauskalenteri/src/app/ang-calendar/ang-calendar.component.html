@@ -116,13 +116,13 @@
       </button>
     </div>
     <div class="modal-body">
-      <div>
+      <div> <!-- testissä miten toimii jos modalData perästä ottaa ? pois -->
         Action:
-        <pre>{{ modalData?.action }}</pre>
+        <pre>{{ modalData.action }}</pre>
       </div>
       <div>
         Event:
-        <pre>{{ modalData?.event | json }}</pre>
+        <pre>{{ modalData.event | json }}</pre>
       </div>
     </div>
     <div class="modal-footer">

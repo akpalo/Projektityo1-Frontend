@@ -1,13 +1,18 @@
+
+<!-- Varaus komponentti, jossa otetaan talteen varaajan tiedot, varattava työväline ja varauksen alku- sekä loppuaika -->
+
 <div class="alusta">
+
   <form class="example-form" [formGroup]="varausForm" (ngSubmit)="varaa()" #varausFrom="ngForm">
-    <!-- puhelinnumero input kenttä -->
+    
+    <!-- Puhelinnumero/Pin input kenttä -->
     <mat-form-field class="numero">
       <mat-label>Varaajan puhelinnumero</mat-label>
       <input matInput placeholder="Puh." formControlName="puhelinnumero" #numeroInput>
     </mat-form-field>
     <br>
 
-    <!-- varattavan laitteen valinta dropmenu -->
+    <!-- Varattavan laitteen valinta dropmenu -->
     <h4 class="otsikko">Valitse laite</h4>
     <mat-form-field>
       <mat-label>Laitteet</mat-label>
@@ -19,7 +24,7 @@
     </mat-form-field>
     <br><br>
 
-    <!-- valittu päivä tulee tähän korttiin näkyville. voi tulla myös lisätietoja -->
+    <!-- Valittut päivät tulevat tähän korttiin näkyville -->
     <mat-form-field>
       <mat-label>Valitse alkupäivä</mat-label>
       <input matInput [matDatepicker]="startDatePicker" formControlName="alkupaiva" placeholder="Valitse alkupäivä">
@@ -36,12 +41,12 @@
 
     <br><br>
 
-    <!-- tämä nappi tallentaa varauksen tiedot tietokantaan -->
+    <!-- Varauksen tallennus tietokantaan -->
     <button mat-raised-button color="primary" type="submit"
       [disabled]="!varausForm.valid">Varaa</button>
     <br><br>
 
-    
+    <!-- Nappi uloskirjautumiseen -->
     <button mat-raised-button color="primary" (click)="logout()">Kirjaudu ulos</button>
     
   </form>

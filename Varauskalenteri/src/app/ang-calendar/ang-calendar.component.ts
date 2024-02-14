@@ -27,12 +27,6 @@ const colors: Record<string, EventColor> = {
   }
 };
 
-/*
-interface Item {
-  value: string;
-  viewValue: string;
-}
-*/
 
 @Component({
   selector: 'app-ang-calendar',
@@ -59,23 +53,10 @@ export class AngCalendarComponent {
   @ViewChild('modalContent', { static: true }) modalContent: TemplateRef<any>
 
   view: CalendarView = CalendarView.Month;
-
   CalendarView = CalendarView;
-
   viewDate: Date = new Date();
+  modalData: { action: string; event: CalendarEvent; }
 
-  modalData: {
-    action: string;
-    event: CalendarEvent;
-  }
-
-/*
-  resItems: Item[] = [
-    { value: '1', viewValue: 'Kamera' },
-    { value: '2', viewValue: 'Valo' },
-    { value: '3', viewValue: 'Green screen' },
-  ];
-*/
 
   actions: CalendarEventAction[] = [
     {
@@ -95,19 +76,19 @@ export class AngCalendarComponent {
     },
   ];
 
+
   refresh = new Subject<void>();
 
-  events: CalendarEvent[] = [  //Taulukko lähes tyhjä, esimerkki-eventtejä vanhasta kalenterista
-
-  ];
-
-  activeDayIsOpen: boolean = false; // Kun kalenteri avataan niin tämän päivän tiedot ovat auki
+  // Esimerkki eventit:
+  events: CalendarEvent[] = [ ];
 
 
+  // Kun kalenteri avataan niin tämän päivän tiedot ovat auki
+  activeDayIsOpen: boolean = false; 
 
-  constructor(private modal: NgbModal, private router: Router) {
-    
-  }
+
+  constructor(private modal: NgbModal, private router: Router) { }
+
 
   dayClicked({ date, events }: { date: Date; events: CalendarEvent[] }): void {
     if (isSameMonth(date, this.viewDate)) {
@@ -123,11 +104,8 @@ export class AngCalendarComponent {
     }
   }
 
-  eventTimesChanged({
-    event,
-    newStart,
-    newEnd,
-  }: CalendarEventTimesChangedEvent): void {
+
+  eventTimesChanged({ event, newStart, newEnd }: CalendarEventTimesChangedEvent): void {
     this.events = this.events.map((iEvent) => {
       if (iEvent === event) {
         return {
@@ -141,13 +119,15 @@ export class AngCalendarComponent {
     this.handleEvent('Dropped or resized', event);
   }
 
+
   handleEvent(action: string, event: CalendarEvent): void {
     this.modalData = { event, action };
     this.modal.open(this.modalContent, { size: 'lg' });
   }
 
-  //TÄÄ KUNTOON KUN HTTP PYYNNÖT TOIMII
-/*
+
+  // Uuden tapahtuman lisäys kalenteriin varauksen tapahtuessa. TÄÄ KUNTOON KUN HTTP PYYNNÖT TOIMII !!
+  /*
   addEvent(): void {
     this.events = [
       ...this.events,
@@ -157,29 +137,29 @@ export class AngCalendarComponent {
         end: this.varausForm.get('loppupaiva')?.value,
         color: colors['red'],
         draggable: false,
-        resizable: {
-          beforeStart: true,
-          afterEnd: true,
-        },
+        resizable: { beforeStart: true, afterEnd: true },
       },
     ];
   }
-*/
+  */
+
 
   deleteEvent(eventToDelete: CalendarEvent) {
     this.events = this.events.filter((event) => event !== eventToDelete);
   }
 
+
   setView(view: CalendarView) {
     this.view = view;
   }
 
+
   closeOpenMonthViewDay() {
     this.activeDayIsOpen = false;
-
   }
 
-/*
+
+/* Varauksen tietojen tulostaminen JSON muodossa tarkastelua varten. Poista kun ei enää tarvitse!
   varausJson() {
     const varausData = {
       puhelinnumero: this.varausForm.get('puhelinnumero')?.value,
@@ -191,6 +171,5 @@ export class AngCalendarComponent {
     return JSON.stringify(varausData, null, 4);
   }
 */
-
 
 }

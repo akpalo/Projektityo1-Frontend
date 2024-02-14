@@ -29,8 +29,6 @@ export class VarausComponent {
   varausForm: FormGroup;
   varausTapahtunut = false;
 
-  
-  
 
   constructor(private router: Router,private fb: FormBuilder, private reservationService: ReservationService, private dateFormatPipe: DateFormatPipe) {
     this.varausForm = this.fb.group({
@@ -43,7 +41,9 @@ export class VarausComponent {
   }
 
   //HUOM: VARAA METODI ON VIELÄ PAHASTI KESKEN!!
+
   varaa() {
+    /*
     const puhelinnumero = this.varausForm.get('puhelinnumero')?.value;
     const valittuLaite = this.varausForm.get('valittuLaite')?.value;
     const alkupaiva = this.varausForm.get('alkupaiva')?.value;
@@ -56,6 +56,7 @@ export class VarausComponent {
     const formattedLoppu = this.dateFormatPipe.transform(loppupaiva);
 
     console.log('Varauksen alkuaika:', formattedAlku);
+    console.log('Varauksen loppuaika:', formattedLoppu);
 
     const varausData = {
       target: valittuLaite,
@@ -81,6 +82,7 @@ export class VarausComponent {
         console.log("Varaus tehty onnistuneesti!")
       }
     });
+    */
   }
 
   

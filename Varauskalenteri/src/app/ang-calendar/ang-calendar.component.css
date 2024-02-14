@@ -1,5 +1,6 @@
 .kalenteri {
     width: 60%;
+    min-width: 600px;
     float: left;
     margin-top: 20px;
     margin-left: 20px;
