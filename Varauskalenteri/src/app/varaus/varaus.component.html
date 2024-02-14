@@ -1,10 +1,9 @@
-
 <!-- Varaus komponentti, jossa otetaan talteen varaajan tiedot, varattava työväline ja varauksen alku- sekä loppuaika -->
 
 <div class="alusta">
 
   <form class="example-form" [formGroup]="varausForm" (ngSubmit)="varaa()" #varausFrom="ngForm">
-    
+
     <!-- Puhelinnumero/Pin input kenttä -->
     <mat-form-field class="numero">
       <mat-label>Varaajan puhelinnumero</mat-label>
@@ -42,12 +41,15 @@
     <br><br>
 
     <!-- Varauksen tallennus tietokantaan -->
-    <button mat-raised-button color="primary" type="submit"
-      [disabled]="!varausForm.valid">Varaa</button>
+    <button mat-raised-button color="primary" type="submit" [disabled]="!varausForm.valid">Varaa</button>
     <br><br>
 
     <!-- Nappi uloskirjautumiseen -->
     <button mat-raised-button color="primary" (click)="logout()">Kirjaudu ulos</button>
-    
+
   </form>
+
+  <app-ang-calendar [target]="varausForm.get('valittuLaite')?.value" [startTime]="varausForm.get('alkupaiva')?.value"
+    [endTime]="varausForm.get('loppupaiva')?.value" (addEventTrigger)="varaa()"></app-ang-calendar>
+
 </div>

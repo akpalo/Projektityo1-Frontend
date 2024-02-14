@@ -1,10 +1,11 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
 import { ReservationService } from '../services/reservation.service';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { Router } from '@angular/router';
 import { DateFormatPipe } from '../date-format.pipe';
+import { AngCalendarComponent } from '../ang-calendar/ang-calendar.component';
 
 interface Item {
   value: string;
@@ -20,6 +21,8 @@ interface Item {
 
 export class VarausComponent {
 
+  @ViewChild(AngCalendarComponent, { static: true }) angCalendarComponent: AngCalendarComponent;
+
   resItems: Item[] = [
     { value: '1', viewValue: 'Kamera' },
     { value: '2', viewValue: 'Valo' },
@@ -30,27 +33,27 @@ export class VarausComponent {
   varausTapahtunut = false;
 
 
-  constructor(private router: Router,private fb: FormBuilder, private reservationService: ReservationService, private dateFormatPipe: DateFormatPipe) {
+  constructor(private router: Router, private fb: FormBuilder, private reservationService: ReservationService, private dateFormatPipe: DateFormatPipe) {
     this.varausForm = this.fb.group({
       puhelinnumero: ['', Validators.required],
       valittuLaite: ['', Validators.required],
       alkupaiva: [''], // Alkupäivän form control
       loppupaiva: [''] // Loppupäivän form control
-      
+
     });
   }
 
   //HUOM: VARAA METODI ON VIELÄ PAHASTI KESKEN!!
 
   varaa() {
-    /*
+
     const puhelinnumero = this.varausForm.get('puhelinnumero')?.value;
     const valittuLaite = this.varausForm.get('valittuLaite')?.value;
     const alkupaiva = this.varausForm.get('alkupaiva')?.value;
     const loppupaiva = this.varausForm.get('loppupaiva')?.value;
 
     console.log('Varauslomakkeen tiedot:', puhelinnumero, valittuLaite, alkupaiva, loppupaiva);
-    
+
 
     const formattedAlku = this.dateFormatPipe.transform(alkupaiva);
     const formattedLoppu = this.dateFormatPipe.transform(loppupaiva);
@@ -64,6 +67,10 @@ export class VarausComponent {
       startTime: formattedAlku,
       endTime: formattedLoppu
     };
+
+
+    //Erottele iso metodi useammaksi pienemmäksi myöhemmin.
+
 
     console.log('Lähetetään varaus backendille:', varausData);
 
@@ -80,14 +87,16 @@ export class VarausComponent {
       },
       complete: () => {
         console.log("Varaus tehty onnistuneesti!")
+
+        this.angCalendarComponent.addEvent();
       }
     });
-    */
+
   }
 
-  
+
   logout() {
     this.router.navigate(['/logout']);
   }
-  
+
 }
