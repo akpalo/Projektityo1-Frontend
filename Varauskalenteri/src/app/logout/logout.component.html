@@ -1,29 +1,6 @@
-<!-- sivun container -->
-<mat-drawer-container class="body-container">
-
-  <!-- sivu valikko -->
-  <mat-drawer closed #sidenav class="sidenav">
-      <p>Sivut:</p>
-      <a href="/login">Login</a>
-      <br>
-      <a href="/logout">Logout</a>
-      <br>
-      <a href="/varaa">Varaus sivu</a>
-  </mat-drawer>
-  
-  <!-- valikon avaus nappi -->
-  <button (click)="sidenav.toggle()" class="sidebar-button" mat-mini-fab color="primary">
-      <mat-icon>menu</mat-icon>
-  </button>
-  
-  <div class="logout-container">
-    <mat-card class="logout-card">
-      <div class="logout-message">Uloskirjautuminen onnistui</div>
-      <button mat-raised-button color="primary" (click)="login()">Kirjaudu uudelleen sisään</button> <!--Lisäsin tähän kirjaudu uudelleen -napin-->
-    </mat-card>
-  </div>
-
-
-</mat-drawer-container>
-
-
+<div class="logout-container">
+  <mat-card class="logout-card">
+    <div class="logout-message">Uloskirjautuminen onnistui</div>
+    <button mat-raised-button color="primary" (click)="login()">Kirjaudu uudelleen sisään</button> <!--Lisäsin tähän kirjaudu uudelleen -napin-->
+  </mat-card>
+</div>

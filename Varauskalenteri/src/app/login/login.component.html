@@ -1,36 +1,12 @@
-<!-- sivun container -->
-<mat-drawer-container class="body-container">
-
-  <!-- sivu valikko -->
-  <mat-drawer closed #sidenav class="sidenav">
-      <p>Sivut:</p>
-      <a href="/login">Login</a>
-      <br>
-      <a href="/logout">Logout</a>
-      <br>
-      <a href="/varaa">Varaus sivu</a>
-      <br>
-      <a href="/kalenteri">Kalenteri</a>
-  </mat-drawer>
-  
-  <!-- valikon avaus nappi -->
-  <button (click)="sidenav.toggle()" class="sidebar-button" mat-mini-fab color="primary">
-      <mat-icon>menu</mat-icon>
-  </button>
-  
-  <div class="login-container">
-    <mat-card class="login-card">
-      <div class="company-name">Yrityksen nimi</div>
-      <form (ngSubmit)="login()" #loginForm="ngForm">
-        <mat-form-field>
-          <mat-label>Puhelinnumero</mat-label>
-          <input matInput type="text" placeholder="Syötä puhelinnumero" name="phoneNumber" ngModel required>
-        </mat-form-field>
-  
-        <button mat-raised-button color="primary" type="submit" [disabled]="!loginForm.form.valid">Kirjaudu sisään</button>
-      </form>
-    </mat-card>
-  </div>
-
-</mat-drawer-container>
-
+<div class="login-container">
+  <mat-card class="login-card">
+    <div class="company-name">Yrityksen nimi</div>
+    <form (ngSubmit)="login()" #loginForm="ngForm">
+      <mat-form-field>
+        <mat-label>Puhelinnumero</mat-label>
+        <input matInput type="text" placeholder="Syötä puhelinnumero" name="phoneNumber" ngModel required>
+      </mat-form-field>
+      <button mat-raised-button color="primary" type="submit" [disabled]="!loginForm.form.valid">Kirjaudu sisään</button>
+    </form>
+  </mat-card>
+</div>

@@ -12,7 +12,7 @@ const routes: Routes = [
   { path: "logout", component: LogoutComponent },
   { path: "angcalendar", component: AngCalendarComponent },
   { path: "varaus", component: VarausComponent },
-  { path: '', redirectTo: '/angcalendar', pathMatch: 'full' },
+  { path: '', redirectTo: '/login', pathMatch: 'full' },
 ];
 
 @NgModule({
@@ -20,3 +20,4 @@ const routes: Routes = [
   exports: [RouterModule]
 })
 export class AppRoutingModule { }
+ 

@@ -11,6 +11,7 @@ import { ReservationService } from '../services/reservation.service';
 import { DataService } from '../services/data.service';
 import { VarausComponent } from '../varaus/varaus.component';
 
+
 const colors: Record<string, EventColor> = {
   red: {
     primary: '#ad2121',
@@ -52,6 +53,8 @@ interface Item {
   ],
   providers: [MatDatepickerModule, MatNativeDateModule]
 })
+
+
 export class AngCalendarComponent {
   @ViewChild('modalContent', { static: true }) modalContent: TemplateRef<any>
 
