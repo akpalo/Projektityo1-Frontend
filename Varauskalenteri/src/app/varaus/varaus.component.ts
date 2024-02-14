@@ -43,7 +43,7 @@ export class VarausComponent {
   //HUOM: VARAA METODI ON VIELÄ PAHASTI KESKEN!!
 
   varaa() {
-    /*
+    
     const puhelinnumero = this.varausForm.get('puhelinnumero')?.value;
     const valittuLaite = this.varausForm.get('valittuLaite')?.value;
     const alkupaiva = this.varausForm.get('alkupaiva')?.value;
@@ -76,13 +76,15 @@ export class VarausComponent {
       error: (error) => {
         console.error('Virhe varauksen lähettämisessä:', error);
         console.log(varausData);
+        alert("Varaus epäonnistui. Tarkista päivämäärä.")
         // Tähän mitä tehdään, jos varauksen tekemisessä tulee virhe
       },
       complete: () => {
         console.log("Varaus tehty onnistuneesti!")
+        alert("Varaus onnistui.")
       }
     });
-    */
+    
   }
 
   
