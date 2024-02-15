@@ -1,4 +1,4 @@
-import { Component, ChangeDetectionStrategy, ViewChild, TemplateRef, Input, EventEmitter, Output } from '@angular/core';
+import { Component, ChangeDetectionStrategy, ViewChild, TemplateRef, Input, EventEmitter, Output, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { startOfDay, endOfDay, subDays, addDays, endOfMonth, isSameDay, isSameMonth, addHours } from 'date-fns';
 import { Subject } from 'rxjs';
@@ -51,7 +51,7 @@ const colors: Record<string, EventColor> = {
 })
 
 
-export class AngCalendarComponent {
+export class AngCalendarComponent implements OnInit {
   @ViewChild('modalContent', { static: true }) modalContent: TemplateRef<any>
 
   view: CalendarView = CalendarView.Month;
@@ -81,6 +81,9 @@ export class AngCalendarComponent {
 
   refresh = new Subject<void>();
 
+  //Varausdata taulukossa ennen muotoilua:
+  reservations: any[];
+
   // Esimerkki eventit:
   events: CalendarEvent[] = [];
 
@@ -89,7 +92,14 @@ export class AngCalendarComponent {
   activeDayIsOpen: boolean = false;
 
 
-  constructor(private modal: NgbModal, private router: Router) { }
+  constructor(private modal: NgbModal, private router: Router, private dataService: DataService) { }
+
+
+  ngOnInit(): void {
+    this.dataService.getReservations().subscribe(reservations => {
+      this.reservations = reservations;
+    });
+  }
 
 
   dayClicked({ date, events }: { date: Date; events: CalendarEvent[] }): void {

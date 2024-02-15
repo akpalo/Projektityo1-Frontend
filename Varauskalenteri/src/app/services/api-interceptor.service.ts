@@ -7,7 +7,7 @@ import { Observable } from 'rxjs';
 export class ApiInterceptor implements HttpInterceptor {
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     const modifiedReq = req.clone({
-      headers: req.headers.set('Authorization', 'ZGV2ZWxvcG1lbnRVc2VyOmRldmVsb3BtZW50UGFzc3dvcmQ='),
+      headers: req.headers.set('apikey', 'ASOIVNRGNRKDWIW'),
     });
     return next.handle(modifiedReq);
   }

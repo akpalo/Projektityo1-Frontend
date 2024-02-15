@@ -20,4 +20,11 @@ export class DataService {
 
     return this.reservationsService.apiReservationsPost$Json({ body: reservationDto });
   }
+
+
+  getReservations() {
+    return this.reservationsService.apiReservationsGet$Json();
+    console.log('Varaukset haettu', this.reservationsService.apiReservationsGet$Json());
+  }
+
 }
