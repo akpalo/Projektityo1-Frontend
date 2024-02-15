@@ -75,7 +75,7 @@ import { DateFormatPipe } from './date-format.pipe';
     MatDatepickerModule,
     MatNativeDateModule,
     HttpClientModule,
-    ApiModule.forRoot({ rootUrl: 'https://localhost:7142/api' })
+    ApiModule.forRoot({ rootUrl: 'https://localhost:7142' })
 
   ],
   providers: [
