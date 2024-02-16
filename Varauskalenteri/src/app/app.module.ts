@@ -34,6 +34,7 @@ import { ApiInterceptor } from './services/api-interceptor.service';
 import { ApiModule } from './api/api.module';
 import { VarausComponent } from './varaus/varaus.component';
 import { DateFormatPipe } from './date-format.pipe';
+import { RegisterComponent } from './register/register.component';
 
 
 
@@ -46,6 +47,7 @@ import { DateFormatPipe } from './date-format.pipe';
     AngCalendarComponent,
     VarausComponent,
     DateFormatPipe,
+    RegisterComponent,
 
   ],
   imports: [
