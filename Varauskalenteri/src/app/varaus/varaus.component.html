@@ -16,8 +16,8 @@
     <mat-form-field>
       <mat-label>Laitteet</mat-label>
       <mat-select formControlName="valittuLaite">
-        <mat-option *ngFor="let item of resItems" [value]="item.value">
-          {{item.viewValue}}
+        <mat-option *ngFor="let item of resItems" [value]="item">
+          {{item.name}}
         </mat-option>
       </mat-select>
     </mat-form-field>
@@ -51,5 +51,9 @@
 
   <app-ang-calendar [target]="varausForm.get('valittuLaite')?.value" [startTime]="varausForm.get('alkupaiva')?.value"
     [endTime]="varausForm.get('loppupaiva')?.value" (addEventTrigger)="varaa()"></app-ang-calendar>
+  <!--<app-ang-calendar
+    *ngIf="varausForm && varausForm.get('valittuLaite')?.value && varausForm.get('alkupaiva')?.value && varausForm.get('loppupaiva')?.value"
+    [target]="varausForm.get('valittuLaite')?.value" [startTime]="varausForm.get('alkupaiva')?.value"
+    [endTime]="varausForm.get('loppupaiva')?.value" (addEventTrigger)="varaa()"></app-ang-calendar>-->
 
 </div>
