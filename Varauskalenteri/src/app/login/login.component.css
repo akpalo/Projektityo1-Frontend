@@ -38,3 +38,7 @@
   background-color: #ff6961; /* Punainen väri */
   color: #ffffff; /* Valkoinen teksti */
 }
+
+button {
+  margin-bottom: 10px;
+}

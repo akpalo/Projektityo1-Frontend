@@ -6,6 +6,7 @@ import { MatNativeDateModule } from '@angular/material/core';
 import { Router } from '@angular/router';
 import { DateFormatPipe } from '../date-format.pipe';
 import { AngCalendarComponent } from '../ang-calendar/ang-calendar.component';
+import { Reservation } from '../api/models';
 import { DataService } from '../services/data.service';
 import { ItemDto } from '../api/models';
 import { Item } from '../api/models';
@@ -74,8 +75,8 @@ export class VarausComponent implements OnInit {
     this.varausForm = this.fb.group({
       puhelinnumero: ['', Validators.required],
       valittuLaite: ['', Validators.required],
-      alkupaiva: [''], // Alkupäivän form control
-      loppupaiva: [''] // Loppupäivän form control
+      alkupaiva: [null, Validators.required], // Alkupäivän form control
+      loppupaiva: [null, Validators.required] // Loppupäivän form control
 
     });
   }
@@ -155,6 +156,26 @@ export class VarausComponent implements OnInit {
     });
 
   }
+
+  varaukset: Reservation[] = [];
+
+  haeVaraukset() {
+    this.reservationService.getReservations().subscribe({
+      next: (response: Reservation[]) => {
+        console.log('Varaukset haettu onnistuneesti', response);
+        this.varaukset = response; // Assign the response data to the property
+      },
+      error: (error) => {
+        console.error('Virhe varauksien haussa:', error);
+        // Tähän mitä tehdään, jos varauksien hakemisessa tulee virhe
+      },
+      complete: () => {
+        console.log("Varaukset haettu onnistuneesti!")
+      }
+    });
+  }
+
+
 
 
   logout() {

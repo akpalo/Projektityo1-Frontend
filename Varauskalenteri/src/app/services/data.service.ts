@@ -31,4 +31,11 @@ export class DataService {
     getItems() {
       return this.itemsService.apiItemsGet$Json();
     }
+
+
+  getReservations() {
+    return this.reservationsService.apiReservationsGet$Json();
+    console.log('Varaukset haettu', this.reservationsService.apiReservationsGet$Json());
+  }
+
 }

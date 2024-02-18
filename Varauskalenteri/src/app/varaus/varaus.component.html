@@ -47,6 +47,8 @@
     <!-- Nappi uloskirjautumiseen -->
     <button mat-raised-button color="primary" (click)="logout()">Kirjaudu ulos</button>
 
+
+
   </form>
 
   <!--Kommentoitu pois tarkoituksella. poistetaan-->
@@ -56,5 +58,15 @@
     *ngIf="varausForm && varausForm.get('valittuLaite')?.value && varausForm.get('alkupaiva')?.value && varausForm.get('loppupaiva')?.value"
     [target]="varausForm.get('valittuLaite')?.value" [startTime]="varausForm.get('alkupaiva')?.value"
     [endTime]="varausForm.get('loppupaiva')?.value" (addEventTrigger)="varaa()"></app-ang-calendar>-->
+
+
+  <div class="varaus">
+    <button mat-raised-button color="primary" (click)="haeVaraukset()">Hae varaukset</button>
+    <h2>Varaukset</h2>
+    <div *ngFor="let varaus of varaukset">
+      <p>{{varaus.owner}} varasi {{varaus.target}} alkaen {{varaus.startTime}} ja päättyen
+        {{varaus.endTime}}</p>
+    </div>
+  </div>
 
 </div>

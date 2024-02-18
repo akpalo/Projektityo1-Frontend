@@ -1,0 +1,21 @@
+
+.register-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    background-color: #f4f4f4;
+  }
+
+  .input-field {
+    margin-bottom: 15px;
+  }
+
+  .registerForm {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    background-color: #f4f4f4;
+    width: 400px;
+  }
