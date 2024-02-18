@@ -107,7 +107,7 @@ export class VarausComponent implements OnInit {
   varaa() {
 
     const puhelinnumero = this.varausForm.get('puhelinnumero')?.value;
-    const valittuLaite = this.varausForm.get('valittuLaite')?.value;
+    const valittuLaite = this.varausForm.get('valittuLaite')?.value.id;
     const alkupaiva = this.varausForm.get('alkupaiva')?.value;
     const loppupaiva = this.varausForm.get('loppupaiva')?.value;
 
@@ -116,6 +116,7 @@ export class VarausComponent implements OnInit {
 
     const formattedAlku = this.dateFormatPipe.transform(alkupaiva);
     const formattedLoppu = this.dateFormatPipe.transform(loppupaiva);
+    
 
     console.log('Varauksen alkuaika:', formattedAlku);
     console.log('Varauksen loppuaika:', formattedLoppu);
@@ -148,7 +149,8 @@ export class VarausComponent implements OnInit {
       complete: () => {
         console.log("Varaus tehty onnistuneesti!")
         alert("Varaus tehty onnistuneesti.")
-        this.angCalendarComponent.addEvent();
+        //Jos aikaa, niin kovakoodataan varaus kalenteriin varausta tehdessä.
+        //this.angCalendarComponent.addEvent();
       }
     });
 

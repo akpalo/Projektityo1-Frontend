@@ -49,8 +49,9 @@
 
   </form>
 
-  <app-ang-calendar [target]="varausForm.get('valittuLaite')?.value" [startTime]="varausForm.get('alkupaiva')?.value"
-    [endTime]="varausForm.get('loppupaiva')?.value" (addEventTrigger)="varaa()"></app-ang-calendar>
+  <!--Kommentoitu pois tarkoituksella. poistetaan-->
+  <!--<app-ang-calendar [target]="varausForm.get('valittuLaite')?.value" [startTime]="varausForm.get('alkupaiva')?.value"
+    [endTime]="varausForm.get('loppupaiva')?.value" (addEventTrigger)="varaa()"></app-ang-calendar>-->
   <!--<app-ang-calendar
     *ngIf="varausForm && varausForm.get('valittuLaite')?.value && varausForm.get('alkupaiva')?.value && varausForm.get('loppupaiva')?.value"
     [target]="varausForm.get('valittuLaite')?.value" [startTime]="varausForm.get('alkupaiva')?.value"
