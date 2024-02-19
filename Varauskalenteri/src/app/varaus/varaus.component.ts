@@ -68,8 +68,8 @@ export class VarausComponent implements OnInit {
 
   //HUOM: VARAA METODI ON VIELÄ PAHASTI KESKEN!!
 
+  // Metodi, jossa otetaan talteen uuden varauksen tiedot formiin
   varaa() {
-
     const puhelinnumero = this.varausForm.get('puhelinnumero')?.value;
     const valittuLaite = this.varausForm.get('valittuLaite')?.value.id;
     const alkupaiva = this.varausForm.get('alkupaiva')?.value;
@@ -77,7 +77,7 @@ export class VarausComponent implements OnInit {
 
     console.log('Varauslomakkeen tiedot:', puhelinnumero, valittuLaite, alkupaiva, loppupaiva);
 
-
+    // Formatoidaan päivät oikeaan muotoon
     const formattedAlku = this.dateFormatPipe.transform(alkupaiva);
     const formattedLoppu = this.dateFormatPipe.transform(loppupaiva);
     

@@ -1,14 +1,22 @@
+<!-- Login sivu -->
 <div class="login-container">
   <mat-card class="login-card">
     <div class="company-name">Mediatalo X</div>
     <form (ngSubmit)="login()" #loginForm="ngForm">
       <mat-form-field>
+
+        <!-- Pyydetään puhelinnumero -->
         <mat-label>Puhelinnumero</mat-label>
         <input matInput type="text" placeholder="Syötä puhelinnumero" name="phoneNumber" ngModel required>
+
       </mat-form-field>
+
+      <!-- Lähetetään login tiedot -->
       <button mat-raised-button color="primary" type="submit" [disabled]="!loginForm.form.valid">Kirjaudu sisään</button>
     </form>
   </mat-card>
+
+  <!-- Navigointi rekisteröitymis sivulle -->
   <button mat-raised-button color="primary" (click)="navigate()">Rekisteröidy</button>
 </div>
 

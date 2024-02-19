@@ -10,12 +10,12 @@ import { User } from '../api/models';
   styleUrls: ['./register.component.css']
 })
 export class RegisterComponent {
-
   hide = true;
 
   registerForm: FormGroup;
   registerSuccess = false;
 
+  // Konstruktoidaan formi, johon tallennetaan uuden käyttäjän tiedot
   constructor(private router: Router, private registerformbuilder: FormBuilder, private registerService: RegisterService) {
     this.registerForm = this.registerformbuilder.group({
       username: ['', Validators.required],
@@ -26,6 +26,7 @@ export class RegisterComponent {
     });
   }
 
+  // Tallennetaan uuden käyttäjän tiedot formiin
   register() {
     const username = this.registerForm.get('username')?.value;
     const password = this.registerForm.get('password')?.value;
@@ -60,6 +61,10 @@ export class RegisterComponent {
         console.log("Käyttäjä lisätty tietokantaan!");
       }
     });
+
+    // Automaattinen navigointi takaisin login sivulle
+    this.router.navigate(['/login']);
+
   }
 
   navigate() {
@@ -68,6 +73,7 @@ export class RegisterComponent {
 
   users: User[] = [];
 
+  // Käyttäjien haku tietokannasta
   getUsers() {
     this.registerService.getUsers().subscribe({
       next: (response: User[]) => {

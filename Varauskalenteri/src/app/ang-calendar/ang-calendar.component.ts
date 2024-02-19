@@ -11,9 +11,7 @@ import { ReservationService } from '../services/reservation.service';
 import { DataService } from '../services/data.service';
 import { VarausComponent } from '../varaus/varaus.component';
 
-
-
-
+// Värikoodit varauksille
 const colors: Record<string, EventColor> = {
   red: {
     primary: '#ad2121',
