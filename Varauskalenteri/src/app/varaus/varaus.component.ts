@@ -13,10 +13,6 @@ import { Item } from '../api/models';
 import { ItemService } from '../services/item.service';
 import { catchError, throwError } from 'rxjs';
 
-/*interface Item {
-  value: string;
-  viewValue: string;
-}*/
 
 @Component({
   selector: 'app-varaus',
@@ -29,43 +25,10 @@ export class VarausComponent implements OnInit {
 
   @ViewChild(AngCalendarComponent, { static: true }) angCalendarComponent: AngCalendarComponent;
 
-  /*resItems: Item[] = [
-    { value: '1', viewValue: 'Kamera' },
-    { value: '2', viewValue: 'Valo' },
-    { value: '3', viewValue: 'Green screen' },
-  ];
-
-  ngOnInit(): void {
-    this.dataService.getItems()
-      .pipe(
-        catchError((error: any) => {
-          console.log('Error:', error);
-          return throwError(error);
-        })
-      )
-      .subscribe(data => {
-        this.resItems = data.map(item => ({ value: item.id.toString(), viewValue: item.name }));
-      });
-  }*/
-
-  resItems: Item[] = []
-
   
 
-  /*resItems: ItemDto[] = [];
-  
-  ngOnInit() {
-    this.dataService.getItems()
-      .pipe(
-        catchError((error: any) => {
-          console.log('Error:', error);
-          return throwError(error);
-        })
-      )
-      .subscribe(data => {
-        this.resItems = data;
-      });
-  }*/
+  resItems: Item[] = [];
+
 
   varausForm: FormGroup;
   varausTapahtunut = false;
@@ -105,8 +68,8 @@ export class VarausComponent implements OnInit {
 
   //HUOM: VARAA METODI ON VIELÄ PAHASTI KESKEN!!
 
+  // Metodi, jossa otetaan talteen uuden varauksen tiedot formiin
   varaa() {
-
     const puhelinnumero = this.varausForm.get('puhelinnumero')?.value;
     const valittuLaite = this.varausForm.get('valittuLaite')?.value.id;
     const alkupaiva = this.varausForm.get('alkupaiva')?.value;
@@ -114,7 +77,7 @@ export class VarausComponent implements OnInit {
 
     console.log('Varauslomakkeen tiedot:', puhelinnumero, valittuLaite, alkupaiva, loppupaiva);
 
-
+    // Formatoidaan päivät oikeaan muotoon
     const formattedAlku = this.dateFormatPipe.transform(alkupaiva);
     const formattedLoppu = this.dateFormatPipe.transform(loppupaiva);
     
@@ -176,7 +139,9 @@ export class VarausComponent implements OnInit {
   }
 
 
-
+  navigate() {
+    this.router.navigate(['/laitteet']);
+  }
 
   logout() {
     this.router.navigate(['/logout']);

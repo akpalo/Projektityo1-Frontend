@@ -23,7 +23,7 @@
     </mat-form-field>
     <br><br>
 
-    <!-- Valittut päivät tulevat tähän korttiin näkyville -->
+    <!-- Valittut päivät tulevat tähän korttiin näkyville. Käyttäjä valitsee DatePickerilla alku- ja loppupäivän -->
     <mat-form-field>
       <mat-label>Valitse alkupäivä</mat-label>
       <input matInput [matDatepicker]="startDatePicker" formControlName="alkupaiva" placeholder="Valitse alkupäivä">
@@ -38,11 +38,12 @@
       <mat-datepicker #endDatePicker></mat-datepicker>
     </mat-form-field>
 
-    <br><br>
-
     <!-- Varauksen tallennus tietokantaan -->
     <button mat-raised-button color="primary" type="submit" [disabled]="!varausForm.valid">Varaa</button>
     <br><br>
+    <button mat-raised-button color="primary" (click)="navigate()">Lisää laite</button>
+    <br><br>
+    
 
     <!-- Nappi uloskirjautumiseen -->
     <button mat-raised-button color="primary" (click)="logout()">Kirjaudu ulos</button>
@@ -50,6 +51,8 @@
 
 
   </form>
+
+  
 
   <!--Kommentoitu pois tarkoituksella. poistetaan-->
   <!--<app-ang-calendar [target]="varausForm.get('valittuLaite')?.value" [startTime]="varausForm.get('alkupaiva')?.value"
@@ -59,7 +62,7 @@
     [target]="varausForm.get('valittuLaite')?.value" [startTime]="varausForm.get('alkupaiva')?.value"
     [endTime]="varausForm.get('loppupaiva')?.value" (addEventTrigger)="varaa()"></app-ang-calendar>-->
 
-
+  <!-- Varausten haku kalenteriin -->
   <div class="varaus">
     <button mat-raised-button color="primary" (click)="haeVaraukset()">Hae varaukset</button>
     <h2>Varaukset</h2>
@@ -69,4 +72,6 @@
     </div>
   </div>
 
-</div>
+  
+  </div>
+

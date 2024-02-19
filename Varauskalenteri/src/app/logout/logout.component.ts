@@ -12,6 +12,7 @@ export class LogoutComponent {
 
   constructor(private router: Router) { }
 
+  // Navigoiminen takaisin login sivulle
   login() {
     this.router.navigate(['/login']);
   }

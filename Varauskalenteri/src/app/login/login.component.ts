@@ -35,6 +35,7 @@ export class LoginComponent {
     }
   }
 
+  // Viesti onnistuneesta sisäänkirjautumisesta
   private showSuccessMessage(message: string): void {
     this.snackBar.open(message, 'OK', {
       duration: 3000,
@@ -43,6 +44,7 @@ export class LoginComponent {
     });
   }
 
+  // Viesti epäonnistuneesta sisäänkirjautumisesta
   private showFailureMessage(message: string): void {
     this.snackBar.open(message, 'OK', {
       duration: 3000,
@@ -52,6 +54,7 @@ export class LoginComponent {
     });
   }
 
+  // Rekisteröitymis sivulle navigointi
   navigate() {
     this.router.navigate(['/register']);
   }

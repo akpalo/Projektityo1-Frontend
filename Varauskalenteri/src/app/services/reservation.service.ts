@@ -7,11 +7,12 @@ import { Reservation, ReservationDto } from '../api/models';
   providedIn: 'root'
 })
 export class ReservationService {
-  private apiUrl = 'https://localhost:7142/api/Reservations'; // Korvaa osoite oikealla backendin URL:llä
-  apiKey = 'ASOIVNRGNRKDWIW'; // Korvaa API-avain oikealla avaimella
+  private apiUrl = 'https://localhost:7142/api/Reservations'; // Backendin osoite
+  apiKey = 'ASOIVNRGNRKDWIW'; // Backendin Apikey
 
   constructor(private http: HttpClient) { }
 
+  // Uuden varauksen lisäys tietokantaan
   addReservation(reservationData: any): Observable<any> {
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
@@ -20,6 +21,7 @@ export class ReservationService {
     return this.http.post(this.apiUrl, reservationData, { headers });
   }
 
+  // Varausten haku tietokannasta
   getReservations(): Observable<Reservation[]> {
     const headers = new HttpHeaders({
       'apikey': this.apiKey // Korvaa API-avain oikealla avaimella

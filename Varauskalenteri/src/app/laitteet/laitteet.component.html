@@ -1,0 +1,25 @@
+<!-- Laitteen lisäys sivu -->
+<div class="addItem-container">
+
+    <!-- Lisäys formi -->
+    <form class="itemForm" [formGroup]="itemForm" (ngSubmit)="addItem()">
+        <h2>Laitteen lisäys</h2>
+
+        <!-- Pyydetää laitteen nimi -->
+        <mat-form-field class="input-field">
+            <mat-label>Laitteen nimi:</mat-label>
+            <input matInput formControlName="name">
+        </mat-form-field>
+
+        <!-- Pyydetään laitteen kuvaus -->
+        <mat-form-field appearance="fill">
+            <textarea matInput formControlName="description" placeholder="Kuvaus"></textarea>
+        </mat-form-field>
+
+        <!--Formin tietojen lähetys -->
+        <button mat-raised-button color="primary"  type="submit" [disabled]="!itemForm.valid">Lisää laite</button>
+    </form>
+
+    <!-- Navigointi takaisin kalenteriin -->
+    <button mat-raised-button color="primary" (click)="navigate()">Takaisin kalenteriin</button>
+</div>
