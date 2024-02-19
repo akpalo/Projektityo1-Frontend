@@ -1,4 +1,4 @@
-import { Component, ChangeDetectionStrategy, ViewChild, TemplateRef, Input, EventEmitter, Output, OnInit } from '@angular/core';
+import { Component, ChangeDetectionStrategy, ViewChild, TemplateRef, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { startOfDay, endOfDay, subDays, addDays, endOfMonth, isSameDay, isSameMonth, addHours } from 'date-fns';
 import { Subject } from 'rxjs';
@@ -10,7 +10,21 @@ import { MatNativeDateModule } from '@angular/material/core';
 import { ReservationService } from '../services/reservation.service';
 import { DataService } from '../services/data.service';
 import { VarausComponent } from '../varaus/varaus.component';
+import { Reservation } from '../api/models';
+import { ItemService } from '../services/item.service';
+import { Item } from '../api/models';
+import { forkJoin } from 'rxjs';
 
+
+/*interface CommonType {
+  id: number;
+  name: string;
+  target: number;
+  owner: string;
+  startTime: Date;
+  endTime: Date;
+}
+*/
 
 
 
@@ -81,25 +95,116 @@ export class AngCalendarComponent implements OnInit {
 
   refresh = new Subject<void>();
 
-  //Varausdata taulukossa ennen muotoilua:
-  reservations: any[];
+
 
   // Esimerkki eventit:
   events: CalendarEvent[] = [];
+  varaukset: Reservation[] = [];
+  resItems: Item[] = [];
+  //combinedArray: CommonType[] = [];
+
+
 
 
   // Kun kalenteri avataan niin tämän päivän tiedot ovat auki
   activeDayIsOpen: boolean = false;
 
 
-  constructor(private modal: NgbModal, private router: Router, private dataService: DataService) { }
+  constructor(private modal: NgbModal, private router: Router, private dataService: DataService, private reservationService: ReservationService, private itemsService: ItemService) { }
 
 
   ngOnInit(): void {
-    this.dataService.getReservations().subscribe(reservations => {
-      this.reservations = reservations;
+    this.haeVarauksetKalenteriin();
+    console.log('Varaukset ngOnInit', this.varaukset);
+  }
+
+  haeVarauksetKalenteriin() {
+    this.reservationService.getReservations().subscribe({
+      next: (response: Reservation[]) => {
+        console.log('Varaukset haettu onnistuneesti', response);
+        this.varaukset = response;
+        this.varaukset.forEach((varaus) => {
+          this.events = [
+            ...this.events,
+            {
+              title: varaus.target?.toString() ?? '',
+              start: new Date(varaus.startTime),
+              end: new Date(varaus.endTime),
+              color: colors['yellow'],
+              draggable: false,
+              resizable: {
+                beforeStart: false,
+                afterEnd: false,
+              },
+            },
+          ];
+        });
+      },
+      error: (error) => {
+        console.error('Virhe varauksien haussa:', error);
+        // Tähän mitä tehdään, jos varauksien hakemisessa tulee virhe
+      },
+      complete: () => {
+        console.log("Varaukset haettu onnistuneesti!")
+      }
     });
   }
+
+
+
+
+  /*
+  
+    ngOnInit() {
+      forkJoin([
+        this.reservationService.getReservations(),
+        this.itemsService.getItem()
+      ]).subscribe({
+        next: ([reservations, items]) => {
+          console.log('Varaukset haettu onnistuneesti', reservations);
+          console.log('Itemit haettu onnistuneesti', items);
+          const mappedVaraukset: CommonType[] = reservations.map(v => {
+            const targetNumber = v.target ? v.target.id : 0;
+            const matchingItem = this.resItems.find(item => item.id === targetNumber);
+            const title = matchingItem ? matchingItem.name : 'No matching item';
+            return {
+              id: v.id as number,
+              name: title as string,
+              target: targetNumber,
+              owner: v.owner as string,
+              startTime: new Date(v.startTime),
+              endTime: new Date(v.endTime)
+            };
+          });
+          this.combinedArray = mappedVaraukset;
+          console.log('Combined array', this.combinedArray);
+          this.combinedArray.forEach((varaus) => {
+            this.events = [
+              ...this.events,
+              {
+                title: varaus.target?.toString() ?? '',
+                start: new Date(varaus.startTime),
+                end: new Date(varaus.endTime),
+                color: colors['yellow'],
+                draggable: false,
+                resizable: {
+                  beforeStart: false,
+                  afterEnd: false,
+                },
+              },
+            ];
+          });
+  
+  
+        },
+        error: (error) => {
+          console.error('Virhe varauksien haussa:', error);
+        }
+      });
+    }
+  
+    */
+
 
 
   dayClicked({ date, events }: { date: Date; events: CalendarEvent[] }): void {
@@ -140,25 +245,22 @@ export class AngCalendarComponent implements OnInit {
 
   // Uuden tapahtuman lisäys kalenteriin varauksen tapahtuessa. TÄÄ KUNTOON KUN HTTP PYYNNÖT TOIMII !!
 
-  @Input() target: string;
-  @Input() startTime: Date;
-  @Input() endTime: Date;
-
-  @Output() addEventTrigger = new EventEmitter<void>();
 
   addEvent(): void {
     this.events = [
       ...this.events,
       {
-        title: this.target,
-        start: this.startTime,
-        end: this.endTime,
+        title: 'New event',
+        start: startOfDay(new Date()),
+        end: endOfDay(new Date()),
         color: colors['red'],
-        draggable: false,
-        resizable: { beforeStart: true, afterEnd: true },
+        draggable: true,
+        resizable: {
+          beforeStart: true,
+          afterEnd: true,
+        },
       },
     ];
-    this.addEventTrigger.emit();
   }
 
 
@@ -176,6 +278,44 @@ export class AngCalendarComponent implements OnInit {
   closeOpenMonthViewDay() {
     this.activeDayIsOpen = false;
   }
+
+  /*
+
+  haeVarauksetKalenteriin() {
+    this.reservationService.getReservations().subscribe({
+      next: (response: Reservation[]) => {
+        console.log('Varaukset haettu onnistuneesti', response);
+        this.varaukset = response; // Assign the response data to the property
+      },
+      error: (error) => {
+        console.error('Virhe varauksien haussa:', error);
+        // Tähän mitä tehdään, jos varauksien hakemisessa tulee virhe
+      },
+      complete: () => {
+        console.log("Varaukset haettu onnistuneesti!")
+      }
+    });
+  }
+
+  ItemsToList() {
+    this.itemsService.getItem().subscribe({
+      next: (response: Item[]) => {
+        console.log("Itemit haettu onnistuneesti", response)
+        this.resItems = response;
+      },
+      error: (error) => {
+        console.error('Virhe itemien hausssa', error)
+        console.error('error')
+      },
+      complete: () => {
+        console.log("Itemit haettu?")
+      },
+    })
+  }
+*/
+
+
+
 
 
   /* Varauksen tietojen tulostaminen JSON muodossa tarkastelua varten. Poista kun ei enää tarvitse!
