@@ -33,7 +33,7 @@ export class VarausComponent {
   varausForm: FormGroup;
   varausTapahtunut = false;
 
-
+  // Konstruktoidaan formi, johon tallennetaan varauksen tiedot
   constructor(private router: Router, private fb: FormBuilder, private reservationService: ReservationService, private dateFormatPipe: DateFormatPipe) {
     this.varausForm = this.fb.group({
       puhelinnumero: ['', Validators.required],
@@ -46,8 +46,8 @@ export class VarausComponent {
 
   //HUOM: VARAA METODI ON VIELÄ PAHASTI KESKEN!!
 
+  // Metodi, jossa otetaan talteen uuden varauksen tiedot formiin
   varaa() {
-
     const puhelinnumero = this.varausForm.get('puhelinnumero')?.value;
     const valittuLaite = this.varausForm.get('valittuLaite')?.value;
     const alkupaiva = this.varausForm.get('alkupaiva')?.value;
@@ -55,7 +55,7 @@ export class VarausComponent {
 
     console.log('Varauslomakkeen tiedot:', puhelinnumero, valittuLaite, alkupaiva, loppupaiva);
 
-
+    // Formatoidaan päivät oikeaan muotoon
     const formattedAlku = this.dateFormatPipe.transform(alkupaiva);
     const formattedLoppu = this.dateFormatPipe.transform(loppupaiva);
 

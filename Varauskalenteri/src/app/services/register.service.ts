@@ -13,6 +13,7 @@ export class RegisterService {
 
   constructor(private http: HttpClient) {}
 
+  // Lisätään uusi käyttäjä tietokantaan
   registerUser(registerData: any): Observable<any> {
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
@@ -21,6 +22,7 @@ export class RegisterService {
     return this.http.post(this.apiUrl, registerData, { headers });
   }
 
+  // Haetaan käyttäjät tietokannasta
   getUsers(): Observable<User[]> {
     const headers = new HttpHeaders({
       'apikey': this.apiKey
