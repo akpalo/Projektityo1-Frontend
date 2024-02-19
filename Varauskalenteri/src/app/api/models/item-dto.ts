@@ -7,4 +7,5 @@ export interface ItemDto {
   images?: Array<ImageDto> | null;
   name?: string | null;
   owner?: number;
+  value?: number; 
 }

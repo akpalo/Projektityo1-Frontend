@@ -1,4 +1,4 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component, ViewChild, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
 import { ReservationService } from '../services/reservation.service';
 import { MatDatepickerModule } from '@angular/material/datepicker';
@@ -7,11 +7,16 @@ import { Router } from '@angular/router';
 import { DateFormatPipe } from '../date-format.pipe';
 import { AngCalendarComponent } from '../ang-calendar/ang-calendar.component';
 import { Reservation } from '../api/models';
+import { DataService } from '../services/data.service';
+import { ItemDto } from '../api/models';
+import { Item } from '../api/models';
+import { ItemService } from '../services/item.service';
+import { catchError, throwError } from 'rxjs';
 
-interface Item {
+/*interface Item {
   value: string;
   viewValue: string;
-}
+}*/
 
 @Component({
   selector: 'app-varaus',
@@ -20,21 +25,53 @@ interface Item {
   providers: [DateFormatPipe]
 })
 
-export class VarausComponent {
+export class VarausComponent implements OnInit {
 
   @ViewChild(AngCalendarComponent, { static: true }) angCalendarComponent: AngCalendarComponent;
 
-  resItems: Item[] = [
+  /*resItems: Item[] = [
     { value: '1', viewValue: 'Kamera' },
     { value: '2', viewValue: 'Valo' },
     { value: '3', viewValue: 'Green screen' },
   ];
 
+  ngOnInit(): void {
+    this.dataService.getItems()
+      .pipe(
+        catchError((error: any) => {
+          console.log('Error:', error);
+          return throwError(error);
+        })
+      )
+      .subscribe(data => {
+        this.resItems = data.map(item => ({ value: item.id.toString(), viewValue: item.name }));
+      });
+  }*/
+
+  resItems: Item[] = []
+
+  
+
+  /*resItems: ItemDto[] = [];
+  
+  ngOnInit() {
+    this.dataService.getItems()
+      .pipe(
+        catchError((error: any) => {
+          console.log('Error:', error);
+          return throwError(error);
+        })
+      )
+      .subscribe(data => {
+        this.resItems = data;
+      });
+  }*/
+
   varausForm: FormGroup;
   varausTapahtunut = false;
 
-  // Konstruktoidaan formi, johon tallennetaan varauksen tiedot
-  constructor(private router: Router, private fb: FormBuilder, private reservationService: ReservationService, private dateFormatPipe: DateFormatPipe) {
+
+  constructor(private dataService: DataService, private router: Router, private fb: FormBuilder, private reservationService: ReservationService, private dateFormatPipe: DateFormatPipe, private itemsService: ItemService) {
     this.varausForm = this.fb.group({
       puhelinnumero: ['', Validators.required],
       valittuLaite: ['', Validators.required],
@@ -43,13 +80,35 @@ export class VarausComponent {
 
     });
   }
+  
+  ngOnInit(): void {
+    this.ItemsToList();
+  } 
+
+  ItemsToList() {
+    this.itemsService.getItem().subscribe({
+      next: (response: Item[]) => {
+        console.log("Itemit haettu onnistuneesti")
+        this.resItems = response;
+      },
+      error: (error) => {
+        console.error('Virhe itemien hausssa', error)
+        console.error('error')
+      },
+      complete:() => {
+        console.log("Itemit haettu?")
+      },
+    })
+  }
+
+  
 
   //HUOM: VARAA METODI ON VIELÄ PAHASTI KESKEN!!
 
   // Metodi, jossa otetaan talteen uuden varauksen tiedot formiin
   varaa() {
     const puhelinnumero = this.varausForm.get('puhelinnumero')?.value;
-    const valittuLaite = this.varausForm.get('valittuLaite')?.value;
+    const valittuLaite = this.varausForm.get('valittuLaite')?.value.id;
     const alkupaiva = this.varausForm.get('alkupaiva')?.value;
     const loppupaiva = this.varausForm.get('loppupaiva')?.value;
 
@@ -58,6 +117,7 @@ export class VarausComponent {
     // Formatoidaan päivät oikeaan muotoon
     const formattedAlku = this.dateFormatPipe.transform(alkupaiva);
     const formattedLoppu = this.dateFormatPipe.transform(loppupaiva);
+    
 
     console.log('Varauksen alkuaika:', formattedAlku);
     console.log('Varauksen loppuaika:', formattedLoppu);
@@ -84,12 +144,14 @@ export class VarausComponent {
       error: (error) => {
         console.error('Virhe varauksen lähettämisessä:', error);
         console.log(varausData);
+        alert("Virhe varauksen tekemisessä. Tarkista päivämäärät.")
         // Tähän mitä tehdään, jos varauksen tekemisessä tulee virhe
       },
       complete: () => {
         console.log("Varaus tehty onnistuneesti!")
-
-        this.angCalendarComponent.addEvent();
+        alert("Varaus tehty onnistuneesti.")
+        //Jos aikaa, niin kovakoodataan varaus kalenteriin varausta tehdessä.
+        //this.angCalendarComponent.addEvent();
       }
     });
 
