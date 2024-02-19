@@ -1,21 +1,20 @@
-import { Component} from '@angular/core';
+import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
 import { ItemService } from '../services/item.service';
 
-
-
 @Component({
   selector: 'app-laitteet',
   templateUrl: './laitteet.component.html',
-  styleUrl: './laitteet.component.css'
+  styleUrls: ['./laitteet.component.css']
 })
+
 export class LaitteetComponent {
    
   itemForm: FormGroup;
   itemLisays = false;
   
-
+  // Konstruktoidaan formi uuden laitteen lisäystä varten
   constructor(private router: Router, private fb: FormBuilder, private itemService: ItemService) {
     this.itemForm = this.fb.group({
       name: ['', Validators.required],
@@ -27,13 +26,16 @@ export class LaitteetComponent {
     this.router.navigate(['/angcalendar']);
   }
 
+  // Uuden laitteen lisäys
   addItem() {
+
+    // Haetaan tiedot formista
     const name = this.itemForm.get('name')?.value;
     const description = this.itemForm.get('description')?.value;
     
-
     console.log('Varauslomakkeen tiedot:', name, description);
 
+    // Tallennetaan formin tiedot
     const newItemData = {
       name: name,
       description: description,
@@ -41,6 +43,7 @@ export class LaitteetComponent {
 
     console.log("Lähetetään uuden laitteen tiedot tietokantaan: ", newItemData);
 
+    // Lähetetään tiedot tietokantaan
     this.itemService.addItem(newItemData).subscribe({
       next: (response) => {
         console.log('Laitteen tiedot lähetetty backendille: ', response);
@@ -58,11 +61,4 @@ export class LaitteetComponent {
       }
     });
   }
-
-  
-
-
-      
 };
-  
-
