@@ -25,7 +25,7 @@ export class VarausComponent implements OnInit {
 
   @ViewChild(AngCalendarComponent, { static: true }) angCalendarComponent: AngCalendarComponent;
 
-  
+
 
   resItems: Item[] = [];
 
@@ -43,10 +43,10 @@ export class VarausComponent implements OnInit {
 
     });
   }
-  
+
   ngOnInit(): void {
     this.ItemsToList();
-  } 
+  }
 
   ItemsToList() {
     this.itemsService.getItem().subscribe({
@@ -58,15 +58,12 @@ export class VarausComponent implements OnInit {
         console.error('Virhe itemien hausssa', error)
         console.error('error')
       },
-      complete:() => {
+      complete: () => {
         console.log("Itemit haettu?")
       },
     })
   }
 
-  
-
-  //HUOM: VARAA METODI ON VIELÄ PAHASTI KESKEN!!
 
   // Metodi, jossa otetaan talteen uuden varauksen tiedot formiin
   varaa() {
@@ -80,7 +77,7 @@ export class VarausComponent implements OnInit {
     // Formatoidaan päivät oikeaan muotoon
     const formattedAlku = this.dateFormatPipe.transform(alkupaiva);
     const formattedLoppu = this.dateFormatPipe.transform(loppupaiva);
-    
+
 
     console.log('Varauksen alkuaika:', formattedAlku);
     console.log('Varauksen loppuaika:', formattedLoppu);
@@ -113,8 +110,6 @@ export class VarausComponent implements OnInit {
       complete: () => {
         console.log("Varaus tehty onnistuneesti!")
         alert("Varaus tehty onnistuneesti.")
-        //Jos aikaa, niin kovakoodataan varaus kalenteriin varausta tehdessä.
-        //this.angCalendarComponent.addEvent();
       }
     });
 

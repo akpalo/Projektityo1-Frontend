@@ -55,10 +55,7 @@
   <br /><br /><br />
 
   <h3>
-    Edit events
-    <button class="btn btn-primary float-end">
-      Add new
-    </button>
+    Varaukset
     <div class="clearfix"></div>
   </h3>
 
@@ -66,12 +63,12 @@
     <table class="table table-bordered">
       <thead>
         <tr>
-          <th>Title</th>
-          <th>Primary color</th>
-          <th>Secondary + text color</th>
-          <th>Starts at</th>
-          <th>Ends at</th>
-          <th>Remove</th>
+          <th>Laite</th>
+          <th>Pääväri</th>
+
+          <th>Alkaa</th>
+          <th>Päättyy</th>
+          <th>Peru</th>
         </tr>
       </thead>
 
@@ -83,11 +80,7 @@
           <td>
             <input type="color" [(ngModel)]="event.color!.primary" (change)="refresh.next()" />
           </td>
-          <td>
-            <input type="color" [(ngModel)]="event.color!.secondary" (change)="refresh.next()" />
-            <input type="color" [ngModel]="event.color!.secondaryText ?? '#1e90ff'"
-              (ngModelChange)="event.color!.secondaryText = $event" (change)="refresh.next()" />
-          </td>
+
           <td>
             <input class="form-control" type="text" mwlFlatpickr [(ngModel)]="event.start"
               (ngModelChange)="refresh.next()" [altInput]="true" [convertModelValue]="true" [enableTime]="true"
@@ -100,7 +93,7 @@
           </td>
           <td>
             <button class="btn btn-danger" (click)="deleteEvent(event)">
-              Delete
+              Poista
             </button>
           </td>
         </tr>
@@ -110,20 +103,34 @@
 
   <ng-template #modalContent let-close="close">
     <div class="modal-header">
-      <h5 class="modal-title">Event action occurred</h5>
+      <h2 class="modal-title">Varauksen tiedot</h2>
       <button type="button" class="close" (click)="close()">
         <span aria-hidden="true">&times;</span>
       </button>
     </div>
     <div class="modal-body">
-      <div> <!-- testissä miten toimii jos modalData perästä ottaa ? pois -->
-        Action:
-        <pre>{{ modalData.action }}</pre>
+      <div *ngIf="modalData.event">
+        <div class="row">
+          <div class="col-md-6">
+            <strong>Varattu laite:</strong>
+            <br />
+            {{ modalData.event.title }}
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-6">
+            <strong>Alkaa:</strong>
+            <br />
+            {{ modalData.event.start | date: 'dd.MM.yyyy HH:mm' }}
+          </div>
+          <div class="col-md-6">
+            <strong>Loppuu:</strong>
+            <br />
+            {{ modalData.event.end | date: 'dd.MM.yyyy HH:mm' }}
+          </div>
+        </div>
       </div>
-      <div>
-        Event:
-        <pre>{{ modalData.event | json }}</pre>
-      </div>
+
     </div>
     <div class="modal-footer">
       <button type="button" class="btn btn-outline-secondary" (click)="close()">
@@ -137,11 +144,3 @@
 
 <!-- Liitetään varaus-komponentti sivulle -->
 <app-varaus class="varaus"></app-varaus>
-
-<!--Data JSON-muodossa testausta varten- ->
-<div class="jsonData" *ngIf="varausTapahtunut">
-  <pre>
-    {{ varausJson() }}
-  </pre>
-</div>
--->

@@ -14,12 +14,17 @@
   flex-direction: column;
   background-color: #f4f4f4;
   width: 400px;
-}  
+}
 
-.addItem-container{
+.addItem-container {
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
   background-color: #f4f4f4;
+}
+
+.custom-button {
+  margin-top: 15px;
+  width: 15%;
 }
