@@ -62,6 +62,10 @@ export class RegisterComponent {
     });
   }
 
+  navigate() {
+    this.router.navigate(['/login']);
+  }
+
   users: User[] = [];
 
   getUsers() {
@@ -77,6 +81,8 @@ export class RegisterComponent {
       complete: () => {
         console.log("Käyttäjät haettu onnistuneesti")
       }
+
+      
     });
   }
 

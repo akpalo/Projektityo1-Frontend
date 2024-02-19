@@ -1,5 +1,5 @@
 <div class="register-container">
-    <form class="registerForm" [formGroup]="registerForm" (ngSubmit)="register()" #loginForm="ngForm">
+    <form class="registerForm" [formGroup]="registerForm" (ngSubmit)="register()" >
         <h2>Rekisteröinti</h2>
 
         <mat-form-field class="input-field">
@@ -30,8 +30,10 @@
             <input matInput placeholder="" formControlName="lastname">
         </mat-form-field>
 
-        <button mat-raised-button color="primary" type="submit" [disabled]="!registerForm.valid">Lähetä</button>
+        <button mat-raised-button color="primary" (click)="navigate()" type="submit" [disabled]="!registerForm.valid">Lähetä</button>
+        
     </form>
+    <button mat-raised-button color="primary" (click)="navigate()">Peruuta</button>
 </div>
 
 

@@ -1,0 +1,18 @@
+<div class="addItem-container">
+    <form class="itemForm" [formGroup]="itemForm" (ngSubmit)="addItem()">
+        <h2>Laitteen lisäys</h2>
+        <mat-form-field class="input-field">
+            <mat-label>Laitteen nimi:</mat-label>
+            <input matInput formControlName="name">
+        </mat-form-field>
+        <mat-form-field appearance="fill">
+            <textarea matInput formControlName="description" placeholder="Kuvaus"></textarea>
+          </mat-form-field>
+        
+          <button mat-raised-button color="primary"  type="submit" [disabled]="!itemForm.valid">Lisää laite</button>
+    </form>
+    <button mat-raised-button color="primary" (click)="navigate()">Takaisin kalenteriin</button>
+</div>
+
+
+

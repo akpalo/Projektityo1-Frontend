@@ -13,10 +13,6 @@ import { Item } from '../api/models';
 import { ItemService } from '../services/item.service';
 import { catchError, throwError } from 'rxjs';
 
-/*interface Item {
-  value: string;
-  viewValue: string;
-}*/
 
 @Component({
   selector: 'app-varaus',
@@ -29,43 +25,10 @@ export class VarausComponent implements OnInit {
 
   @ViewChild(AngCalendarComponent, { static: true }) angCalendarComponent: AngCalendarComponent;
 
-  /*resItems: Item[] = [
-    { value: '1', viewValue: 'Kamera' },
-    { value: '2', viewValue: 'Valo' },
-    { value: '3', viewValue: 'Green screen' },
-  ];
-
-  ngOnInit(): void {
-    this.dataService.getItems()
-      .pipe(
-        catchError((error: any) => {
-          console.log('Error:', error);
-          return throwError(error);
-        })
-      )
-      .subscribe(data => {
-        this.resItems = data.map(item => ({ value: item.id.toString(), viewValue: item.name }));
-      });
-  }*/
-
-  resItems: Item[] = []
-
   
 
-  /*resItems: ItemDto[] = [];
-  
-  ngOnInit() {
-    this.dataService.getItems()
-      .pipe(
-        catchError((error: any) => {
-          console.log('Error:', error);
-          return throwError(error);
-        })
-      )
-      .subscribe(data => {
-        this.resItems = data;
-      });
-  }*/
+  resItems: Item[] = [];
+
 
   varausForm: FormGroup;
   varausTapahtunut = false;
@@ -176,7 +139,9 @@ export class VarausComponent implements OnInit {
   }
 
 
-
+  navigate() {
+    this.router.navigate(['/laitteet']);
+  }
 
   logout() {
     this.router.navigate(['/logout']);

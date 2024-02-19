@@ -43,6 +43,9 @@
     <!-- Varauksen tallennus tietokantaan -->
     <button mat-raised-button color="primary" type="submit" [disabled]="!varausForm.valid">Varaa</button>
     <br><br>
+    <button mat-raised-button color="primary" (click)="navigate()">Lisää laite</button>
+    <br><br>
+    
 
     <!-- Nappi uloskirjautumiseen -->
     <button mat-raised-button color="primary" (click)="logout()">Kirjaudu ulos</button>
@@ -50,6 +53,8 @@
 
 
   </form>
+
+  
 
   <!--Kommentoitu pois tarkoituksella. poistetaan-->
   <!--<app-ang-calendar [target]="varausForm.get('valittuLaite')?.value" [startTime]="varausForm.get('alkupaiva')?.value"
@@ -69,4 +74,6 @@
     </div>
   </div>
 
-</div>
+  
+  </div>
+

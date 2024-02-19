@@ -19,4 +19,12 @@ export class ItemService {
     });
     return this.http.get<Item[]>(this.apiUrl);
   }
+
+  addItem(itemData: any): Observable<any> {
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'apikey': this.apiKey // Korvaa API-avain oikealla avaimella
+    });
+    return this.http.post(this.apiUrl, itemData, { headers });
+  }
 }

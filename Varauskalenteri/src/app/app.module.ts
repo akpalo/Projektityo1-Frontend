@@ -35,6 +35,7 @@ import { ApiModule } from './api/api.module';
 import { VarausComponent } from './varaus/varaus.component';
 import { DateFormatPipe } from './date-format.pipe';
 import { RegisterComponent } from './register/register.component';
+import { LaitteetComponent } from './laitteet/laitteet.component';
 
 
 
@@ -48,6 +49,7 @@ import { RegisterComponent } from './register/register.component';
     VarausComponent,
     DateFormatPipe,
     RegisterComponent,
+    LaitteetComponent
 
   ],
   imports: [
