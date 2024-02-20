@@ -57,7 +57,7 @@ export class LaitteetComponent {
       },
       complete: () => {
         console.log("Laite lisätty tietokantaan!");
-        alert("Uusi laite lisätty tietokantaan")
+        alert("Uusi laite lisätty!")
       }
     });
   }

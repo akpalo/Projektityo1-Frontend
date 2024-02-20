@@ -59,6 +59,7 @@ export class RegisterComponent {
       },
       complete: () => {
         console.log("Käyttäjä lisätty tietokantaan!");
+        alert('Rekisteröinti onnistui!')
       }
     });
 

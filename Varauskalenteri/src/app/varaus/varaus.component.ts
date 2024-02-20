@@ -104,7 +104,7 @@ export class VarausComponent implements OnInit {
       error: (error) => {
         console.error('Virhe varauksen lähettämisessä:', error);
         console.log(varausData);
-        alert("Virhe varauksen tekemisessä. Tarkista päivämäärät.")
+        alert("Virhe varauksen tekemisessä.")
         // Tähän mitä tehdään, jos varauksen tekemisessä tulee virhe
       },
       complete: () => {
